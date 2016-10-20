@@ -1,5 +1,9 @@
-
-
+body {
+  font-family: 'Lato', verdana, sans-serif;
+  color: #fff;
+  text-align: center;
+  background: rgb(250,250,250);
+}
 
 .container {
   display: flex;
@@ -33,23 +37,34 @@
 
 .content {
   position: absolute;
-  height: 90%; /* = 100% - 2*5% padding */
-  width: 90%; /* = 100% - 2*5% padding */
-  padding: 5%;
+  height: 90%;
+  width: 90%;
+  margin: 5%;
 }
 
 .textbox {
+  background: rgb(20, 20, 20);
   background: rgba(0,0,0,.6);
   width:100%;
   height:100%;
   font-size: 14px;
-  font-size: 1.5vw;
+  font-size: 1.5em;
   opacity: 1;
 }
 
-.logo {
-  height: 15px;
+.logos {
+  height: 20px;
+  display: flex;
 }
+
+ /*For mobile devices*/
+@media only screen and (max-width: 768px) {
+  .square {
+    width: 30%;
+    padding-bottom: 30%;
+  }
+}
+
 
 /*  For lists */
 ul{
@@ -90,11 +105,4 @@ li{
 }
 .mb-image {
   background-image: url('http://static1.squarespace.com/static/54ed5347e4b0baa5b2214761/54ed6ce6e4b0d6a5d747c09d/54f005d8e4b0da6eadbbce20/1425016281374/San+Francisco+Marin+Mountain+Bike+Ride++full+size+pics-2.jpg?format=2500w');
-}
-
-body {
-  font-family: 'Lato', verdana, sans-serif;
-  color: #fff;
-  text-align: center;
-  background: rgb(250,250,250);
 }
