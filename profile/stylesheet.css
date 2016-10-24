@@ -65,8 +65,8 @@ p {
  /*For mobile devices*/
 @media only screen and (max-width: 768px) {
   .square {
-    width: 30%;
-    padding-bottom: 30%;
+    width: 48%;
+    padding-bottom: 48%;
   }
   .textbox{
     font-size: 0.8em;
