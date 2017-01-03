@@ -1,0 +1,26 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "personal homepage and portfolio",
+  "main": "jscript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntaft/ntaft.github.io.git"
+  },
+  "author": "Nick Taft",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ntaft/ntaft.github.io/issues"
+  },
+  "homepage": "https://github.com/ntaft/ntaft.github.io#readme",
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.8.0"
+  }
+}
