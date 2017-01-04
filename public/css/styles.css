@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  align-items: center;
 }
 
 p {
@@ -21,18 +22,17 @@ p {
   width: 22%;
   padding-bottom : 22%; /* = width for a 1:1 aspect ratio */
   margin: 1%;
-  background-color: rgb(20, 20, 20);
+  background-color: rgba(20, 20, 20, .9);
   overflow: hidden;
   border-radius: 15px;
   transition: width .5s; /* makes for a smooth transition when changing size */
   -o-transition: width .5s;
   -webkit-transition: width .5s;
   -moz-transition: width .5s;
-  opacity: .9;
 }
 
 .square:hover{
-  opacity: 1;
+  background-color: rgba(20, 20, 20, 1);
 }
 
 #box2{
@@ -76,7 +76,6 @@ p {
   }
 }
 
-
 /*  For lists */
 ul{
   text-align:left;
@@ -101,19 +100,14 @@ li{
 
 
 .headshot {
-  background-image: url('headshot.jpg');
+  background-image: url('/assets/headshot.jpg');
   opacity: 1;
+}
 
-}
-.brewing-image {
-  background-image: url('http://www.alloverbeer.com/wp-content/uploads/2014/01/Homebrew-Fermentation-384x255.jpg');
-}
 .coding-image {
-  background-image: url('CodePhoto.png');
+  background-image: url('/assets/CodePhoto.png');
 }
+
 .museum-image {
-  background-image: url('http://carolportfolio.com/exhibition_design/images/perot/perot1.jpg');
-}
-.mb-image {
-  background-image: url('http://static1.squarespace.com/static/54ed5347e4b0baa5b2214761/54ed6ce6e4b0d6a5d747c09d/54f005d8e4b0da6eadbbce20/1425016281374/San+Francisco+Marin+Mountain+Bike+Ride++full+size+pics-2.jpg?format=2500w');
+  background-image: url('/assets/perot1.jpg');
 }

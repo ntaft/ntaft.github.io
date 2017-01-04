@@ -2,7 +2,7 @@
   "name": "homepage",
   "version": "1.0.0",
   "description": "personal homepage and portfolio",
-  "main": "jscript.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +22,10 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.8.0"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
   }
 }
