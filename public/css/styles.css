@@ -8,6 +8,15 @@ body {
   margin: 0;
 }
 
+header {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
+  height: 500px;
+  background: darkgrey;
+}
+
 #first-section {
   display: flex;
   flex-flow: row wrap;
