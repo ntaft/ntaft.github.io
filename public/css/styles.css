@@ -11,7 +11,7 @@ body {
 #first-section {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -184,7 +184,6 @@ li{
 .proj {
   color: rgba(0, 0, 0, 0);
   background-color: rgba(0, 0, 0, 0);
-  width: 48%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,11 +193,6 @@ li{
   background-color: rgba(20, 20, 20, 1);
   opacity: 1;
   color: rgba(250, 250, 250, 1);
-}
-
-img {
-  height: 220px;
-  width: 400px;
 }
 
 #RP1{
@@ -266,7 +260,6 @@ input, textarea {
   border: none;
   border-top: 1px solid #FAFAFA;
   background-color: #FAFAFA;
-
 }
 
 textarea {
