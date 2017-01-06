@@ -1,11 +1,15 @@
 body {
   font-family: 'Lato', verdana, sans-serif;
   color: #fff;
-  text-align: center;
+/*  text-align: center;*/
   background: rgb(250,250,250);
   height: 100%;
   width: 100%;
   margin: 0;
+  background-image: url("../assets/nyc_bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 header {
@@ -31,38 +35,41 @@ p {
 .square {
   /*float:left;*/
   position: relative;
-  width: 22%;
-  padding-bottom : 22%; /* = width for a 1:1 aspect ratio */
+  width: 33%;
+  padding-bottom : 33%; /* = width for a 1:1 aspect ratio */
   margin: 1%;
   background-color: rgba(20, 20, 20, .9);
+  color: rgba(0, 0, 0, 0);
   overflow: hidden;
   border-radius: 15px;
   transition: width .5s; /* makes for a smooth transition when changing size */
   -o-transition: width .5s;
   -webkit-transition: width .5s;
   -moz-transition: width .5s;
+  opacity: 0.8;
 }
 
-.square:hover{
+.square:hover {
   background-color: rgba(20, 20, 20, 1);
-}
-
-#box2{
-  width: 46%; /* = starts out for the default width */
+  color: rgba(250, 250, 250, 1);
+  opacity: 1;
 }
 
 .content {
   position: absolute;
-  height: 90%;
-  width: 90%;
-  margin: 5%;
+/*  background: rgb(20, 20, 20);
+  background: rgba(0,0,0,.6);
+  padding: 3%;
+  border-radius: 15px;*/
 }
+
 
 .textbox {
   background: rgb(20, 20, 20);
   background: rgba(0,0,0,.6);
   padding: 3%;
   border-radius: 15px;
+  display: none;
 
   /*font-size: 14px;*/
   font-size: 1.1em;
@@ -171,7 +178,6 @@ li{
 }
 
 #second-section {
-  height: 600px; /*temp make responsive?*/
   background-color: gray;
 }
 
@@ -182,12 +188,12 @@ li{
 .portfolio-block {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  height: 520px; /*temp make responsive -- js window height*/
+  justify-content: space-around;
+  align-items: space-around;
+  width: 65%;
   margin: 5%;
   background-color: darkgrey;
+  padding-bottom: 5%;
 }
 
 .proj {
@@ -200,59 +206,51 @@ li{
 
 .proj:hover {
   background-color: rgba(20, 20, 20, 1);
-  opacity: 1;
   color: rgba(250, 250, 250, 1);
 }
 
-#RP1{
+#box1{
+  background-image: url("../assets/tappity.png");
+}
+
+#box2{
+  background-image: url("../assets/digital_gypsy.png");
+}
+
+#box3{
+  background-image: url("../assets/brewit.png");
+}
+
+#box4{
+  background-image: url("../assets/golife.png");
+}
+
+#box5 {
   background-image: url("../assets/perot1.jpg");
 }
 
-#RP2{
+#box6 {
   background-image: url("../assets/perot1.jpg");
 }
 
-#RP3{
-  background-image: url("../assets/perot1.jpg");
-}
-
-#RP4{
-  background-image: url("../assets/perot1.jpg");
-}
-
-#PP1 {
-  background-image: url("../assets/perot1.jpg");
-}
-
-#PP2 {
-  background-image: url("../assets/perot1.jpg");
-}
-
-#PP3 {
-  background-image: url("../assets/perot1.jpg");
-}
-
-#PP4 {
-  background-image: url("../assets/perot1.jpg");
-}
-
-/*aside {
-  width: 50%;
-  height: 600px;
-  position: absolute;
+aside {
+  position: relative;
   background-color: grey;
   display: inline-block;
   right: 0;
-}*/
+}
 
 #third-section {
-/*  height: 600px;
-  background-color: snow;*/
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: snow;
+  height: 520px;
 }
 
 .contact-container {
   text-align: center;
-  width: 50%;
 /*  background: darkgrey;*/
   height: 600px;
   display: inline-block;
@@ -282,4 +280,12 @@ button {
   margin: 10px;
   border-style: none;
   box-shadow: 0 3px 5px #888888;
+}
+
+.headshot {
+  display: inline;
+  background-image: url("../assets/headshot.jpg");
+  border-radius: 50%;
+  width: 20%;
+  padding-bottom: 20%;
 }

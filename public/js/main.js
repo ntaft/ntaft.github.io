@@ -14,22 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetWidth (clickedBox) {
     const winWid = window.innerWidth
-  	for (let i = 1; i < 8; i++) {
+  	for (let i = 1; i < 7; i++) {
   		let boxNumber = `box${i}`
       let eachBox = document.getElementById(boxNumber);
       //makes sure that all are reset except for current item
   		if (eachBox != clickedBox) {
         if (winWid > 768) {
-  			eachBox.style.width = '22%';
+  			eachBox.style.width = '33%';
       } else {
-        eachBox.style.width = '48%';
+        eachBox.style.width = '66%';
       }
       document.getElementById(`hidden${i}`).style.display = 'none';
       };
   	}
   }
 
-  for (let i = 1; i < 8; i++) {
+  for (let i = 1; i < 7; i++) {
     let box = document.getElementById(`box${i}`);
     box.addEventListener('click', () => expandContent(box, `hidden${i}`));
   };
