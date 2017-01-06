@@ -1,5 +1,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+
+  const header = document.getElementsByTagName('header');
+  header[0].style.height = `${window.innerHeight}px`;
+
   function expandContent(clickedBox, hiddenContent) {
     if (window.innerWidth > 768){
   	   clickedBox.style.width = '46%';
@@ -22,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (winWid > 768) {
   			eachBox.style.width = '33%';
       } else {
-        eachBox.style.width = '66%';
+        eachBox.style.width = '99%';
       }
       document.getElementById(`hidden${i}`).style.display = 'none';
       };
@@ -33,4 +37,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let box = document.getElementById(`box${i}`);
     box.addEventListener('click', () => expandContent(box, `hidden${i}`));
   };
+
+  function buttonHandler() {
+  const button = document.querySelector('button');
+  button.onclick = sendMail
+}
+
+  function sendMail (e) {
+  e.preventDefault();
+
+  const mailPayload = {
+    name: e.path[1][0].value,
+    email: e.path[1][1].value,
+    body: e.path[1][2].value,
+    }
+  console.log(mailPayload);
+  for (i=0; i < e.path[1].length; i++) {
+    e.path[1][i].value = "";
+  }
+  const button = document.querySelector('button');
+  button.innerHTML = "Thanks for contacting me!";
+  button.removeEventListener("click", sendMail)
+  }
+
+  buttonHandler();
+
 });

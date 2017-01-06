@@ -7,35 +7,52 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   </head>
   <body>
+    <section>
+      <header>
+        <h1>Nick Taft</h1>
+        <h2>Full Stack Web Developer</h2>
+        <nav>
+          <a href="#first-section">About Me</a> |
+          <a href="#second-section">Projects</a> |
+          <a href="#third-section">Contact</a>
+        </nav>
+        <div class="ext-links">
+          <a href="#">LinkedIn</a> -
+          <a href="#">GitHub</a> -
+          <a href="#">Facebook?</a>
+        </div>
+      </header>
+    </section>
 
-    <header>
-      <h1>Nick Taft</h1>
-      <h2>Full Stack Web Developer</h2>
-      <nav>
-        <a href="#first-section">About Me</a> |
-        <a href="#second-section">Projects</a> |
-        <a href="#contact">Contact</a>
-      </nav>
-      <div class="ext-links">
-        <a href="#">LinkedIn</a> -
-        <a href="#">GitHub</a> -
-        <a href="#">Facebook?</a>
-      </div>
-    </header>
+    <section id="first-section">
+      <div class="about-box">
+        <h2>About Me</h2>
+          <div class="about-text">
+            <p>
+              I am an engaged and passionate coder, with a lifelong love of learning. From tinkering in the garage to tinkering with code, I enjoy coming up with novel solutions to complex problems. Through extensive research, collaboration and dedication, I support my team to ensure successful results and share my knowledge, compassion and enthusiasm to resolve any issue.
+            </p>
+          </div>
+        </div>
+    </section>
 
     <section id="second-section">
     <div class="portfolio-container">
+      <h2>Recent Projects</h2>
       <div class="portfolio-block">
-
 
       <div id="box1" class="square bg">
         <div class="content">
-          <!-- <h2>Tappity</h2> -->
+
           <div id="hidden1" class="textbox">
+            <h2>Tappity</h2>
+            <p>
+              Blending wearable tech with web design, tap your fingers to record and dub musical tracks.
+            </p>
             <ul>Tech Used:
-              <li>CSS, HTML, Javascript, jQuery</li>
-              <li>Node.js, Express, AJAX</li>
-              <li>PSQL, MongoDB, React, Ruby, Rails</li>
+              <li>CSS, HTML, Javascript, React</li>
+              <li>Node, Express, AJAX, PSQL</li>
+              <li>Web Audio API, bcrypt, JWT</li>
+              <li>Arduino, Rasberry Pi</li>
             </ul>
           </div>
         </div>
@@ -43,8 +60,8 @@
 
       <div id="box2" class="square bg">
         <div class="content">
-          <!-- <h2>Digital Gypsy</h2> -->
           <div id="hidden2" class="textbox">
+            <h2>Digital Gypsy</h2>
             <ul>Tech Used:
               <li>CSS, HTML, Javascript, jQuery</li>
               <li>Node.js, Express, AJAX</li>
@@ -56,12 +73,15 @@
 
       <div id="box3" class="square bg">
         <div class="content">
-          <!-- <h2>BrewIt</h2> -->
           <div id="hidden3" class="textbox">
+            <h2>BrewIt</h2>
+            <p>
+              Craft and save your own home-brew beer recipes; view brewing calculations
+            </p>
             <ul>Tech Used:
-              <li>CSS, HTML, Javascript, jQuery</li>
+              <li>CSS, HTML, Javascript, EJS</li>
               <li>Node.js, Express, AJAX</li>
-              <li>PSQL, MongoDB, React, Ruby, Rails</li>
+              <li>MongoDB, bcrypt</li>
             </ul>
           </div>
         </div>
@@ -71,10 +91,13 @@
         <div class="content">
           <!-- <h2>Game of Life Game</h2> -->
           <div id="hidden4" class="textbox">
+            <h2>GoGoL</h2>
+            <p>
+              Gamification of Conway's Game of Life; zap cells and avoid being devoured
+            </p>
             <ul>Tech Used:
-              <li>CSS, HTML, Javascript, jQuery</li>
-              <li>Node.js, Express, AJAX</li>
-              <li>PSQL, MongoDB, React, Ruby, Rails</li>
+              <li>CSS, HTML</li>
+              <li>Javascript, jQuery</li>
             </ul>
           </div>
         </div>
@@ -82,13 +105,16 @@
 
       </div>
 
+      <h2>Past Projects</h2>
+
       <div class="portfolio-block">
 
         <div id="box5" class="square bg">
         <div class="content">
           <!-- <h2>HERE</h2> -->
           <div id="hidden5" class="textbox">
-            <ul>Tech Used:
+            <h2>HERE</h2>
+            <ul>Researcher
               <li>CSS, HTML, Javascript, jQuery</li>
               <li>Node.js, Express, AJAX</li>
               <li>PSQL, MongoDB, React, Ruby, Rails</li>
@@ -101,7 +127,8 @@
         <div class="content">
           <!-- <h2>Perot Museum of Nature and Science</h2> -->
           <div id="hidden6" class="textbox">
-            <ul>Tech Used:
+            <h2>Perot Museum of Nature and Science</h2>
+            <ul>Content Developer
               <li>CSS, HTML, Javascript, jQuery</li>
               <li>Node.js, Express, AJAX</li>
               <li>PSQL, MongoDB, React, Ruby, Rails</li>
@@ -111,11 +138,6 @@
       </div>
 
     </section>
-
-    <section id="second-section">
-
-
-  </section>
 
   <section id="third-section">
     <div class="contact-container">
