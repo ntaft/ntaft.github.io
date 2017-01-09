@@ -67,21 +67,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const canvas = document.querySelector('.board');
   const context = canvas.getContext('2d');
-  canvas.style.height = `${window.innerHeight}px`;
-  canvas.style.width = `${window.innerHeight}px`;
+  canvas.height = `${window.innerWidth}`;
+  canvas.width = `${window.innerWidth}`;
+  context.globalAlpha=0.8;
 
 
   var board = [];
   var game = {
     rows: 50,
     columns: 50,
-    speed: 300,
+    speed: 200,
     density: 1.2,
-    pxWide: canvas.clientWidth,
-    pxHigh: canvas.clientHeight
+    pxWide: canvas.width,
+    pxHigh: canvas.height,
+    color: '#f44242'
   };
-
-
 
   // // pixel ratio adjuster via https://github.com/jondavidjohn/hidpi-canvas-polyfill
   // var getPixelRatio = function(context) {
@@ -99,8 +99,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const numRows = game.rows;
   const numCols = game.columns;
 
-  const canvasWidth = canvas.clientWidth // / getPixelRatio(context);
-  const canvasHeight = canvas.clientHeight // / getPixelRatio(context);
+  const canvasWidth = canvas.width // / getPixelRatio(context);
+  const canvasHeight = canvas.height // / getPixelRatio(context);
 
 //   board.offscreenCanvas = document.createElement("canvas");
 // board.offscreenCanvas.width = canvasHeight;
@@ -206,19 +206,18 @@ document.addEventListener('DOMContentLoaded', () => {
          };
          var neighbors = neighborSum (y, x);
          var state = null;
-         // Basic rules of the Game of Life:
-         // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
-
+         // calculates the dot positioning
           var xPos = (x * (dotDiameter + xMargin)) + dotMargin + (xMargin / 2) + dotRadius;
           var yPos = (y * (dotDiameter + yMargin)) + dotMargin + (yMargin / 2) + dotRadius;
-
+          // Basic rules of the Game of Life:
+          // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
           if ((cellVal === 1) && (( neighbors <= 3 ) && (neighbors >= 2))) {
            state = 1;
-           drawDot(xPos, yPos, dotRadius, '#F03C69');
+           drawDot(xPos, yPos, dotRadius, game.color);
          // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
          } else if ((cellVal === 0) && (neighbors === 3)) {
            state = 1;
-            drawDot(xPos, yPos, dotRadius, '#F03C69');
+            drawDot(xPos, yPos, dotRadius, game.color);
          } else {
            state = 0;
            // context.clearRect( xPos, yPos, dotRadius*2, dotRadius*2);
