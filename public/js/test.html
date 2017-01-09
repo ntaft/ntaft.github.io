@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>test</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+  <canvas position="absolute" top="0" left="0" width="967px" height="600px">
+
+  </canvas>
+
+  <script>
+
+
+
+
+  window.innerHeight
+  // Setup
+  const canvas = document.querySelector('canvas');
+  const context = canvas.getContext('2d');
+
+  // pixel ratio adjuster via https://github.com/jondavidjohn/hidpi-canvas-polyfill
+  var getPixelRatio = function(context) {
+    var backingStore = context.backingStorePixelRatio ||
+          context.webkitBackingStorePixelRatio ||
+          context.mozBackingStorePixelRatio ||
+          context.msBackingStorePixelRatio ||
+          context.oBackingStorePixelRatio ||
+          context.backingStorePixelRatio || 1;
+
+    return (window.devicePixelRatio || 1) / backingStore;
+  };
+
+  // canvas.style.height = `${window.innerHeight}px`
+  // canvas.style.width = `${window.innerWidth}px`
+
+  const dotMargin = 1;
+  const numRows = 20
+  const numCols = 15
+
+  const canvasWidth = canvas.clientWidth // / getPixelRatio(context);
+  const canvasHeight = canvas.clientHeight // / getPixelRatio(context);
+
+
+
+  // Because we don't know which direction (x vs. y) is the limiting sizing
+  // factor, we'll calculate both first.
+
+
+
+  const dotWidth = ((canvasWidth - (2 * dotMargin)) / numCols) - dotMargin;
+  const dotHeight = ((canvasHeight - (2 * dotMargin)) / numRows) - dotMargin;
+  // Now, we use the limiting dimension to set the diameter.
+  if( dotWidth > dotHeight )
+  {
+    var dotDiameter = dotHeight;
+    var xMargin = (canvasWidth - ((2 * dotMargin) + (numCols * dotDiameter))) / numCols;
+    var yMargin = dotMargin;
+  }
+  else
+  { var dotDiameter = dotWidth;
+    var xMargin = dotMargin;
+    var yMargin = (canvasHeight - ((2 * dotMargin) + (numRows * dotDiameter))) / numRows;
+  }
+  // Radius is still half of the diameter, because ... math.
+  var dotRadius = Math.abs(dotDiameter) * 0.5;
+  // Now, we have to iterate in both directions, so we need a loop within a loop.
+  // This loop is a little more complicated because the margin in the direction
+  // with more space is not going to be the value you set.
+  function drawBoard (color) {
+    for(var i = 0; i < numRows; i++){
+      for(var j = 0; j < numCols; j++) {
+        var x = (j * (dotDiameter + xMargin)) + dotMargin + (xMargin / 2) + dotRadius;
+        var y = (i * (dotDiameter + yMargin)) + dotMargin + (yMargin / 2) + dotRadius;
+      drawDot(x, y, dotRadius, '#F03C69');
+      }
+    }
+  }
+
+  function drawDot(x, y, radius, color) {
+    context.beginPath(); context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    context.fillStyle = color;
+    context.fill();
+  }
+
+drawBoard();
+
+//   function draw() {
+//   var canvas = document.querySelector('canvas');
+//   if (canvas.getContext) {
+//     var ctx = canvas.getContext('2d');
+
+//     ctx.fillRect(25,25,100,100);
+//     ctx.clearRect(45,45,60,60);
+//     ctx.strokeRect(50,50,50,50);
+//   }
+// }
+// draw();
+
+// function draw() {
+//   const canvas = document.querySelector('canvas');
+
+//   if (canvas.getContext){
+//     const ctx = canvas.getContext('2d');
+//     const height = 400;
+//     const width = 800;
+//     const margin = 50; // Margin between circles
+//     const radius = 20; // Arc radius
+//     const startAngle = 0; // Starting point on circle
+//     const endAngle = Math.PI * 2; // End point on circle
+//     document.querySelector('canvas').style.width = `${width}px`
+//     document.querySelector('canvas').style.height = `${height}px`
+
+//     for(var i=0;i<4;i++){
+//       for(var j=0;j<3;j++){
+//         ctx.beginPath();
+//         var x = margin+j*margin*2; // x coordinate
+//         var y = margin+i*margin*2; // y coordinate
+//         ctx.arc(x, y, radius, startAngle, endAngle, false);
+//         if (false){
+//           return;
+//         } else {
+//           ctx.fill();
+//         }
+//       }
+//     }
+//   }
+// }
+// setInterval(draw, 50);
+
+  </script>
+</body>
+</html>
