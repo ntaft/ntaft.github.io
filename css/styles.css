@@ -52,7 +52,6 @@ h1 {
 h2 {
   text-align: center;
   font-size: 1.8em;
-  /*font-family: 'Bungee', cursive;*/
   padding: 0 10px;
 }
 
@@ -321,7 +320,7 @@ textarea {
 }
 
 button {
-  background-color: rgb(255, 220, 15);
+  background-color: #cdd422;
   height: 40px;
   width: 300px;
   margin: 10px;

@@ -81,8 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     density: 1.2,
     pxWide: canvas.width,
     pxHigh: canvas.height,
-    color1: 'rgb(255, 0, 0)',
-    color2: 'rgb(255, 0, 0)'
+    color1: '#8B370D',
+    color2: '#8B370D'
   };
 
   // // pixel ratio adjuster via https://github.com/jondavidjohn/hidpi-canvas-polyfill
