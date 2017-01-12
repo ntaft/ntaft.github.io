@@ -1,15 +1,10 @@
 body {
   font-family: 'Lato', verdana, sans-serif;
   color: black;
-/*  text-align: center;*/
-/*  background: rgb(250,250,250);
-*/  height: 100%;
+  /*height: 100%;*/
   width: 100%;
   margin: 0;
   background: rgba(240,240,240,1);
-  background-image: url("/assets/grey.png");
-  background-repeat: repeat;
-  background-attachment: fixed;
 
 /*background: -moz-linear-gradient(top, rgba(240,240,240,1) 0%, rgba(209,209,209,1) 34%, rgba(209,209,209,1) 73%, rgba(240,240,240,1) 100%);
 background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(240,240,240,1)), color-stop(34%, rgba(209,209,209,1)), color-stop(73%, rgba(209,209,209,1)), color-stop(100%, rgba(240,240,240,1)));
@@ -37,10 +32,6 @@ img, h1, h2, a {
   /*box-shadow: 10px 0px 10px rgba(240, 240, 240, .8), -10px 0px 10px rgba(240, 240, 240, .8), 0px 10px 10px rgba(240, 240, 240, .8), 0px -10px 10px rgba(240, 240, 240, .8);*/
 }
 
-h2 {
-  padding: 0 10px;
-}
-
 img {
   height: 50px;
   width: 50px;
@@ -56,7 +47,6 @@ img {
   background: rgba(240,240,240,1);
   background-image: url("/assets/grey.png");
   background-repeat: repeat;
-
 }
 
 header {
@@ -64,16 +54,25 @@ header {
   flex-flow: column nowrap;
   justify-content: space-around;
   align-items: center;
-  /*background: rgba(240,240,240,1);*/
   position: relative;
   z-index: 1;
+  /*font-family: 'Press Start 2P', cursive;*/
+  /*font-family: 'Bungee', cursive;*/
+  /*font-family: 'Monofett', cursive;*/
 }
 
 h1 {
   font-size: 5.5em;
-  font-weight: bolder;
   margin: 30px 0 20px 0;
   padding: 10px;
+  font-family: 'Bungee', cursive;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8em;
+  /*font-family: 'Bungee', cursive;*/
+  padding: 0 10px;
 }
 
 a {
@@ -84,26 +83,24 @@ a {
   margin: 0;
 }
 
+a:hover {
+/*  color: rgba(10, 10, 10, 1);*/
+  font-weight: bold;
+}
+
 nav > a {
   font-size: 1.5em;
   margin: 0 20px 0 20px;
   color: rgba(10, 10, 10, 1);
 }
 
-a:hover {
-/*  color: rgba(10, 10, 10, 1);*/
-  font-weight: bold;
+p {
+  font-size: 1.18em;
 }
-
-h2 {
-  text-align: center;
-  font-size: 1.8em;
-}
-
 
 #first-section {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   background: rgba(200, 200, 200, .8);
@@ -112,26 +109,38 @@ h2 {
 
 .about-text {
   width: 768px;
+  text-align: center;
 }
 
-p {
-  font-size: 1.18em;
+
+
+.skill-bar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  background: rgba(30, 30, 30, .8);
+  width: 100%;
 }
+
+.skill-bar > img {
+  padding: 10px;
+}
+
 
 .square {
   /*float:left;*/
   position: relative;
   width: 33%;
-  padding-bottom : 33%; /* = width for a 1:1 aspect ratio */
+  padding-bottom: 33%; /* = width for a 1:1 aspect ratio */
   margin: 5%;
   background-color: rgba(20, 20, 20, .9);
   color: rgba(0, 0, 0, 0);
   overflow: hidden;
-  border-radius: 15px;
-  transition: width .5s; /* makes for a smooth transition when changing size */
+  /*border-radius: 15px;*/
+/*  transition: width .5s;
   -o-transition: width .5s;
   -webkit-transition: width .5s;
-  -moz-transition: width .5s;
+  -moz-transition: width .5s;*/
   /*opacity: 0.8;*/
 }
 
@@ -144,10 +153,6 @@ p {
 
 .content {
   position: absolute;
-/*  background: rgb(20, 20, 20);
-  background: rgba(0,0,0,.6);
-  padding: 3%;*/
-  border-radius: 15px;
   display: flex;
   align-items: center;
 }
@@ -157,17 +162,18 @@ p {
   background: rgb(20, 20, 20);
   background: rgba(0,0,0,.6);
   padding: 0 3% 50% 3%;
-  border-radius: 15px;
+  /*border-radius: 15px;*/
   /*display: none;*/
   width: 100%;
   height: 100%;
   font-size: 1.1em;
   opacity: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .textbox:hover {
   opacity: 1;
+  font-weight: normal;
 }
 
 
@@ -202,7 +208,7 @@ p {
 ul{
   margin: 0;
   padding: 0 20px 0 20px;
-  list-style-position: inside;
+  list-style-position: outside;
 }
 
 li{
