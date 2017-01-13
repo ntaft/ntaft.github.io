@@ -47,12 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function sendMail (e) {
   e.preventDefault();
 
-  const mailPayload = {
-    name: e.path[1][0].value,
-    email: e.path[1][1].value,
-    body: e.path[1][2].value,
-    }
-  console.log(mailPayload);
+  const form = new FormData(document.getElementById('send-message'));
+  fetch('https://formspree.io/taft82@gmail.com', {
+    method: "POST",
+    body: form,
+  });
+
   for (i=0; i < e.path[1].length; i++) {
     e.path[1][i].value = "";
   }

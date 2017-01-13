@@ -177,11 +177,11 @@
     <div class="contact-container">
       <h2 class="feather">Contact me</h2>
       <div class="form-box">
-        <form action="submit">
+        <form id="send-message" action="https://formspree.io/taft82@gmail.com" method="POST">
           <input type="text" name="name" value="" placeholder="Name"><br>
-          <input type="text" name="email" value="" placeholder="Email"><br>
-          <textarea name="body" rows="10" placeholder="Message"></textarea><br>
-          <button>
+          <input type="email" name="_replyto" value="" placeholder="Email"><br>
+          <textarea name="message" rows="10" placeholder="Message"></textarea><br>
+          <button type="submit" value="Send">
             Submit
           </button>
         </form>
