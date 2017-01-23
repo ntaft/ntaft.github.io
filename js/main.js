@@ -81,8 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
     density: 1.2,
     pxWide: canvas.width,
     pxHigh: canvas.height,
-    color1: '#8B370D',
-    color2: '#8B370D'
+    color1: '#FF4136',
+    color2: '#FF4136',
+    background: 'rgb(250, 250, 250)',
   };
 
   // // pixel ratio adjuster via https://github.com/jondavidjohn/hidpi-canvas-polyfill
@@ -192,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
     function lifeGen() {
-      context.fillStyle="rgb(240, 240, 240)";
+      context.fillStyle=game.background;
       context.fillRect( 0, 0, canvasWidth, canvasHeight)
       x = 0;
       y = -1;
