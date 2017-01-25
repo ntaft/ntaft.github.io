@@ -40,28 +40,78 @@ document.addEventListener('DOMContentLoaded', () => {
   // };
 
   function buttonHandler() {
-  const button = document.querySelector('button');
-  button.onclick = sendMail
+  const sendButton = document.querySelector('#send-button');
+  const museumButton = document.querySelector('#museum-button')
+  sendButton.onclick = sendMail;
+  museumButton.onclick = () => location.href = 'http://www.nytimes.com/2012/12/01/arts/design/the-perot-museum-of-nature-and-science-in-dallas.html'
 }
 
+  // function sendMail (e) {
+  // e.preventDefault();
+
+  // const form = new FormData(document.getElementById('send-message'));
+  // fetch('https://formspree.io/taft82@gmail.com', {
+  //   method: "POST",
+  //   body: form,
+  // });
+
+  // for (i=0; i < e.path[1].length; i++) {
+  //   e.path[1][i].value = "";
+  // }
+  // const button = document.querySelector('button');
+  // button.innerHTML = "Thanks for contacting me!";
+  // button.removeEventListener("click", sendMail)
+  // }
+
+
+
+   // simply checks forms for completion and validation
+  function formValid (f) {
+    for (const val of f) {
+      if (val[1] === '') {
+        return false;
+      }
+      // basic regex validator for email
+      if (val[0] === '_replyto' && !(/^.+@.+$/.exec(val[1]))) {
+         return 'invalid email';
+      }
+    }
+    return true;
+  }
+
+  // submits mail through formspree (temp solution)
   function sendMail (e) {
-  e.preventDefault();
+    e.preventDefault();
+    const button = document.querySelector('button');
+    const form = new FormData(document.getElementById('send-message'));
+    const isFilled = formValid(form);
+    if (isFilled) {
+      if (isFilled === 'invalid email') {
+        button.innerHTML = 'Please enter a valid email';
+        button.style.backgroundColor = '#FF4136';
+      } else {
+      const emails = ['taft82'];
+      emails.forEach((i) => {
+        fetch(`https://formspree.io/${i}@gmail.com`, {
+          method: 'POST',
+          body: form,
+        });
+      });
 
-  const form = new FormData(document.getElementById('send-message'));
-  fetch('https://formspree.io/taft82@gmail.com', {
-    method: "POST",
-    body: form,
-  });
-
-  for (i=0; i < e.path[1].length; i++) {
-    e.path[1][i].value = "";
+      for (i=0; i < e.path[1].length; i++) {
+        e.path[1][i].value = '';
+      }
+      button.innerHTML = 'Thanks for contacting me!';
+      button.style.backgroundColor = '#3b5998'
+      button.removeEventListener('click', sendMail)
+    }
+    } else {
+      button.innerHTML = 'Please fill out all fields';
+      button.style.backgroundColor = '#FF4136'
+    }
   }
-  const button = document.querySelector('button');
-  button.innerHTML = "Thanks for contacting me!";
-  button.removeEventListener("click", sendMail)
-  }
 
-  buttonHandler();
+buttonHandler();
 
   // <-------------- game of life code ---------------->
 
@@ -81,8 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     density: 1.2,
     pxWide: canvas.width,
     pxHigh: canvas.height,
-    color1: '#FF4136',
-    color2: '#FF4136',
+    cellColor: '#FF4136',
     background: 'rgb(250, 250, 250)',
   };
 
@@ -193,8 +242,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
     function lifeGen() {
-      context.fillStyle=game.background;
+      context.fillStyle = game.background;
       context.fillRect( 0, 0, canvasWidth, canvasHeight)
+      context.fillStyle = game.cellColor;
       x = 0;
       y = -1;
       yBound = 0;
@@ -217,11 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
           // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
           if ((cellVal === 1) && (( neighbors <= 3 ) && (neighbors >= 2))) {
            state = 1;
-           drawDot(xPos, yPos, dotRadius, game.color1);
+           drawDot(xPos, yPos, dotRadius);
          // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
          } else if ((cellVal === 0) && (neighbors === 3)) {
            state = 1;
-            drawDot(xPos, yPos, dotRadius, game.color2);
+            drawDot(xPos, yPos, dotRadius);
          } else {
            state = 0;
            // context.clearRect( xPos, yPos, dotRadius*2, dotRadius*2);
@@ -249,7 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // canvas.style.width = `${window.innerWidth}px`
 
   function drawDot(x, y, radius, color) {
-    context.fillStyle = color;
     context.fillRect(x, y, radius*2, radius*2);
     // context.beginPath();
     // context.arc(x, y, radius, 0, 2 * Math.PI, false);
