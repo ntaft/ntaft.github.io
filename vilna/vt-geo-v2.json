@@ -119,18 +119,18 @@
       "Notes": "6 weeks in Lodz"
     }
   },
-  // { "type": "Feature",
-  //   "geometry": {"type": "Point", "coordinates": [0, 0]},
-  //   "properties": {
-  //     "Date": "Winter 1918",
-  //     "Troupe": "O",
-  //     "Event": "2nd tour - Lodz and the provinces",
-  //     "Play": "",
-  //     "Author": "",
-  //     "Location": "Polish Provinces (precise locations unknown)",
-  //     "Notes": "Follow previous tour to map"
-  //   }
-  // },
+  { "type": "Feature",
+    "geometry": {"type": "Point", "coordinates": [20, 52]},
+    "properties": {
+      "Date": "Winter 1918",
+      "Troupe": "O",
+      "Event": "2nd tour - Lodz and the provinces",
+      "Play": "",
+      "Author": "",
+      "Location": "Polish Provinces (precise locations unknown)",
+      "Notes": "Follow previous tour to map"
+    }
+  },
   { "type": "Feature",
     "geometry": {"type": "Point", "coordinates": [19.205886, 51.767722]},
     "properties": {
@@ -793,7 +793,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-71.803084, 42.261089]},
     "properties": {
       "Date": "June 5 1924",
       "Troupe": "AA",
@@ -805,7 +805,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-71.063611, 42.358056]},
     "properties": {
       "Date": "June 6-7 1924",
       "Troupe": "AA",
@@ -817,7 +817,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-71.163611, 42.706944]},
     "properties": {
       "Date": "June 8 1924",
       "Troupe": "AA",
@@ -829,7 +829,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-71.063611, 42.358056]},
     "properties": {
       "Date": "June 8 1924",
       "Troupe": "AA",
@@ -841,7 +841,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-71.422222, 41.823611]},
     "properties": {
       "Date": "June 9 1924",
       "Troupe": "AA",
@@ -853,7 +853,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-72.674286, 41.762736]},
     "properties": {
       "Date": "June 10 1924",
       "Troupe": "AA",
@@ -865,7 +865,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-77.611389, 43.165556]},
     "properties": {
       "Date": "June 11 1924",
       "Troupe": "AA",
@@ -877,7 +877,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-77.611389, 43.165556]},
     "properties": {
       "Date": "June 12 1924",
       "Troupe": "AA",
@@ -889,7 +889,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-78.849444, 42.904722]},
     "properties": {
       "Date": "June 13 1924",
       "Troupe": "AA",
@@ -901,7 +901,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-81.669722, 41.482222]},
     "properties": {
       "Date": "June 14 1924",
       "Troupe": "AA",
@@ -913,7 +913,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-83.045833, 42.331389]},
     "properties": {
       "Date": "June 15 1924",
       "Troupe": "AA",
@@ -925,7 +925,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-90.197778, 38.627222]},
     "properties": {
       "Date": "June 16 1924",
       "Troupe": "AA",
@@ -937,7 +937,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-84.516667, 39.1]},
     "properties": {
       "Date": "June 17 1924",
       "Troupe": "AA",
@@ -949,7 +949,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-79.976389, 40.439722]},
     "properties": {
       "Date": "June 18 1924",
       "Troupe": "AA",
@@ -961,7 +961,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-79.976389, 40.439722]},
     "properties": {
       "Date": "June 19-21 1924",
       "Troupe": "AA",
@@ -973,7 +973,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-74.172574, 40.72422]},
     "properties": {
       "Date": "June 22 1924",
       "Troupe": "AA",
@@ -985,7 +985,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-72.923611, 41.31]},
     "properties": {
       "Date": "June 23 1924",
       "Troupe": "AA",
@@ -997,7 +997,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-79.889444, 40.02]},
     "properties": {
       "Date": "June 24 1924",
       "Troupe": "AA",
@@ -1009,7 +1009,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-79.976389, 40.439722]},
     "properties": {
       "Date": "June 25 1924",
       "Troupe": "AA",
@@ -1021,7 +1021,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-80.65, 41.1]},
     "properties": {
       "Date": "June 26 1924",
       "Troupe": "AA",
@@ -1033,7 +1033,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-81.669722, 41.482222]},
     "properties": {
       "Date": "June 27 1924",
       "Troupe": "AA",
@@ -1045,7 +1045,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-87.684722, 41.836944]},
     "properties": {
       "Date": "June 28 1924",
       "Troupe": "AA",
@@ -1057,7 +1057,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-83.045833, 42.331389]},
     "properties": {
       "Date": "June 29 1924",
       "Troupe": "AA",
@@ -1069,7 +1069,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-79.4, 43.7]},
     "properties": {
       "Date": "July 1 1924",
       "Troupe": "AA",
@@ -1081,7 +1081,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-73.566667, 45.5]},
     "properties": {
       "Date": "July 2-3 1924",
       "Troupe": "AA",
@@ -1105,14 +1105,14 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [47.843925, 25.918844]},
     "properties": {
       "Date": "Sept.-Oct. 1924",
       "Troupe": "MVT",
       "Event": "Tour of the Romanian provinces",
       "Play": "",
       "Author": "",
-      "Location": "Bukovina, Besarabia, Transylvania",
+      "Location": "Bukovina, Besarabia, Transylvania ** NT put marker on Rădăuți",
       "Notes": "Follow previous tour to map"
     }
   },
@@ -1153,7 +1153,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [20, 52]},
     "properties": {
       "Date": "Summer 1925",
       "Troupe": "MVT",
@@ -1177,7 +1177,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [25, 46]},
     "properties": {
       "Date": "Fall 1925 - Winter 1926",
       "Troupe": "MVT",
@@ -1261,7 +1261,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [21.316667, 46.166667]},
     "properties": {
       "Date": "Jul-26",
       "Troupe": "MVT",
@@ -1393,7 +1393,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [20, 52]},
     "properties": {
       "Date": "Nov. 1928",
       "Troupe": "MVT",
@@ -1441,7 +1441,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [-74.0059, 40.7127]},
     "properties": {
       "Date": "Summer 1929",
       "Troupe": "Bronx",
@@ -1573,7 +1573,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [16.364378, 48.199425]},
     "properties": {
       "Date": "Feb. 1930",
       "Troupe": "Stein",
@@ -1584,6 +1584,8 @@
       "Notes": ""
     }
   },
+
+
   { "type": "Feature",
     "geometry": {"type": "Point", "coordinates": [-73.904098, 40.812118]},
     "properties": {
@@ -1621,7 +1623,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [13.383333, 52.516667]},
     "properties": {
       "Date": "Fall 1931",
       "Troupe": "Stein",
@@ -1681,14 +1683,14 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [0, 0]},
+    "geometry": {"type": "Point", "coordinates": [14.441241, 50.090031]},
     "properties": {
       "Date": "1933",
       "Troupe": "Stein",
       "Event": "European Tour",
       "Play": "Der dibuk",
       "Author": "",
-      "Location": "Prague State Kamer Theater",
+      "Location": "Prague State Kamer Theater ** NT do you mean Karin State Theater?",
       "Notes": ""
     }
   },
