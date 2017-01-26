@@ -63,8 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // button.removeEventListener("click", sendMail)
   // }
 
-
-
    // simply checks forms for completion and validation
   function formValid (f) {
     for (const val of f) {
