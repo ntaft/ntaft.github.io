@@ -104,20 +104,24 @@ document.addEventListener('DOMContentLoaded', () => {
         xhr.send(form);
         // needed to prevent redirect
         xhr.abort();
+        return false;
       });
-      emails.forEach((i) => {
-        fetch(`https://formspree.io/${i}@gmail.com`, {
-          method: 'POST',
-          body: form,
-        });
-      });
+      // emails.forEach((i) => {
+      //   fetch(`https://formspree.io/${i}@gmail.com`, {
+      //     method: 'POST',
+      //     body: form,
+      //   });
+      // });
 
-      for (i=0; i < e.path[1].length; i++) {
-        e.path[1][i].value = '';
-      }
+
       button.innerHTML = 'Thanks for contacting me!';
       button.style.backgroundColor = '#3b5998'
       button.removeEventListener('click', sendMail)
+      if (e.path[1]) {
+        for (i=0; i < e.path[1].length; i++) {
+          e.path[1][i].value = '';
+        }
+      };
     }
     } else {
       button.innerHTML = 'Please fill out all fields';
