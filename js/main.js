@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         xhr.send(form);
         // needed to prevent redirect
         xhr.abort();
-        return false;
       });
       // emails.forEach((i) => {
       //   fetch(`https://formspree.io/${i}@gmail.com`, {
