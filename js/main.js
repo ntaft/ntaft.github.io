@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // submits mail through formspree (temp solution)
-  function sendMail (e) {
+  function sendMail(e) {
     e.preventDefault();
     const button = document.querySelector('button');
     const form = new FormData(document.getElementById('send-message'));
@@ -89,6 +89,22 @@ document.addEventListener('DOMContentLoaded', () => {
         button.style.backgroundColor = '#FF4136';
       } else {
       const emails = ['taft82'];
+      var xhr = new XMLHttpRequest();
+      emails.forEach( function(i) {
+        xhr.open("POST", 'https://formspree.io/'+i+'@gmail.com', true);
+        //Send the proper header information along with the request
+        // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        // Call function when the state changes
+        // xhr.onreadystatechange = () => {
+        //     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+        //         console.log('sending form to' + i);
+        //     }
+        // }
+        xhr.send(form);
+        // needed to prevent redirect
+        xhr.abort();
+      });
       emails.forEach((i) => {
         fetch(`https://formspree.io/${i}@gmail.com`, {
           method: 'POST',
