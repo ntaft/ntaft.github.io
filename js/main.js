@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // }
 
    // simply checks forms for completion and validation
-  function formValid (f) {
-    for (const val of f) {
+  function formValid(f) {
+    for (let val of f) {
       if (val[1] === '') {
         return false;
       }
