@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // simply checks forms for completion and validation
   function formValid(f) {
-    for (let val of f) {
+    f.forEach((val) => {
       if (val[1] === '') {
         return false;
       }
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (val[0] === '_replyto' && !(/^.+@.+$/.exec(val[1]))) {
          return 'invalid email';
       }
-    }
+    });
     return true;
   }
 
@@ -93,13 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
       emails.forEach((i) => {
         try {
           fetch(`https://formspree.io/${i}@gmail.com`, {
+            mode: 'no-cors',
             method: 'POST',
             body: form,
-            mode: 'no-cors',
           })
           .catch(err => console.log(err));
         }
         catch (e) {
+            console.log('fetch not supported; ', e);
             var xhr = new XMLHttpRequest();
             xhr.open("POST", `https://formspree.io/${i}@gmail.com`, true);
             //Send the proper header information along with the request
