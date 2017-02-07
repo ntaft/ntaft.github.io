@@ -65,22 +65,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // simply checks forms for completion and validation
   function formValid(f) {
+    let test = true;
+    let i = 0;
     f.forEach((val) => {
-      if (val[1] === '') {
-        return false;
+      if (val === '') {
+        test = false;
       }
       // basic regex validator for email
-      if (val[0] === '_replyto' && !(/^.+@.+$/.exec(val[1]))) {
-         return 'invalid email';
+      if (i ===  1 && !(/^.+@.+$/.exec(val))) {
+         test = 'invalid email';
       }
+      i++;
     });
-    return true;
+    console.log(test);
+    return test;
   }
 
   // submits mail through formspree (temp solution)
   function sendMail(e) {
     e.preventDefault();
-    const button = document.querySelector('button');
+    const button = document.querySelector('#send-button');
     const form = new FormData(document.getElementById('send-message'));
     const isFilled = formValid(form);
     if (isFilled) {
@@ -89,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         button.style.backgroundColor = '#FF4136';
       } else {
       const emails = ['taft82'];
-
       emails.forEach((i) => {
         try {
           fetch(`https://formspree.io/${i}@gmail.com`, {
@@ -109,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       });
 
-
       button.innerHTML = 'Thanks for contacting me!';
       button.style.backgroundColor = '#3b5998'
       button.removeEventListener('click', sendMail)
@@ -117,11 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
         for (i=0; i < e.path[1].length; i++) {
           e.path[1][i].value = '';
         }
-      };
+      }
     }
-    } else {
-      button.innerHTML = 'Please fill out all fields';
-      button.style.backgroundColor = '#FF4136'
+  } else {
+    button.innerHTML = 'Please fill out all fields';
+    button.style.backgroundColor = '#FF4136'
     }
   }
 
