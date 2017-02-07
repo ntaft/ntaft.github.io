@@ -65,20 +65,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // simply checks forms for completion and validation
   function formValid(f) {
+    // safari hates forms, just send it regardless
+    // otherwise test it
     let test = true;
     let i = 0;
-    f.forEach((val) => {
-      if (val === '') {
-        test = false;
-      }
-      // basic regex validator for email
-      if (i ===  1 && !(/^.+@.+$/.exec(val))) {
-         test = 'invalid email';
-      }
-      i++;
-    });
+    try {
+      f.forEach((val) => {
+        if (val === '') {
+          test = false;
+        }
+        // basic regex validator for email
+        if (i ===  1 && !(/^.+@.+$/.exec(val))) {
+           test = 'invalid email';
+        }
+        i++;
+      });
+    }
+    catch (e) {
+      console.log('safari dislikes form data, sending regardless', e)
+      return test;
+    }
+    finally {
     console.log(test);
     return test;
+    }
   }
 
   // submits mail through formspree (temp solution)
