@@ -95,20 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
           fetch(`https://formspree.io/${i}@gmail.com`, {
             method: 'POST',
             body: form,
+            mode: 'no-cors',
           })
           .catch(err => console.log(err));
         }
         catch (e) {
-          console.log(e);
-          var xhr = new XMLHttpRequest();
-          xhr.open('POST', `https://formspree.io/${i}@gmail.com`, true);
-          //Send the proper header information along with the request
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-          xhr.send(form);
-        };
-    });
-
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", `https://formspree.io/${i}@gmail.com`, true);
+            //Send the proper header information along with the request
+            // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(form);
+          }
+      });
 
 
       button.innerHTML = 'Thanks for contacting me!';
