@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
       emails.forEach( function(i) {
         xhr.open("POST", 'https://formspree.io/'+i+'@gmail.com', true);
         //Send the proper header information along with the request
-        // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         // Call function when the state changes
         // xhr.onreadystatechange = () => {
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // }
         xhr.send(form);
         // needed to prevent redirect
-        xhr.abort();
+        // xhr.abort();
       });
       // emails.forEach((i) => {
       //   fetch(`https://formspree.io/${i}@gmail.com`, {
