@@ -98,7 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
           })
           .catch(err => console.log(err));
         }
-        catch((e) => {
+        catch (e) {
+          console.log(e);
           var xhr = new XMLHttpRequest();
             xhr.open("POST", 'https://formspree.io/'+i+'@gmail.com', true);
             //Send the proper header information along with the request
