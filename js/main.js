@@ -101,12 +101,12 @@ document.addEventListener('DOMContentLoaded', () => {
         catch (e) {
           console.log(e);
           var xhr = new XMLHttpRequest();
-            xhr.open("POST", 'https://formspree.io/'+i+'@gmail.com', true);
-            //Send the proper header information along with the request
-            // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhr.open('POST', `https://formspree.io/${i}@gmail.com`, true);
+          //Send the proper header information along with the request
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-            xhr.send(form);
-          });
+          xhr.send(form);
+        };
     });
 
 
