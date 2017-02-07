@@ -65,33 +65,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // simply checks forms for completion and validation
   function formValid(f) {
-    // safari hates forms, just send it regardless
-    // otherwise test it
+    // safari hates formData, so just going with DOM manipulation here
     let test = true;
-    let i = 0;
-    try {
-      f.forEach((val) => {
-        if (val === '') {
-          test = false;
-        }
-        // basic regex validator for email
-        if (i ===  1 && !(/^.+@.+$/.exec(val))) {
-           test = 'invalid email';
-        }
-        i++;
-      });
+    const form = {
+      name: document.querySelector('input[name=name]').value,
+      email: document.querySelector('input[name=_replyto]').value,
+      body: document.querySelector('textarea[name=message]').value,
+    };
+    // regex email validator
+    if (!(/^.+@.+$/.exec(form.email))) test = 'invalid email';
+    // tests if the fields are empty
+    for (let field in form) {
+      if (form[field] === '') test = false;
     }
-    catch (e) {
-      console.log('safari dislikes form data, sending regardless', e)
-      return test;
-    }
-    finally {
-    console.log(test);
     return test;
-    }
   }
 
-  // submits mail through formspree (temp solution)
+  // submits mail via formspree, while blocking their popup page.
   function sendMail(e) {
     e.preventDefault();
     const button = document.querySelector('#send-button');
@@ -103,6 +93,9 @@ document.addEventListener('DOMContentLoaded', () => {
         button.style.backgroundColor = '#FF4136';
       } else {
       const emails = ['taft82'];
+      button.innerHTML = 'Sending...';
+      // I like fetch, safari hates it. gonna try it anyway
+
       emails.forEach((i) => {
         try {
           fetch(`https://formspree.io/${i}@gmail.com`, {
@@ -110,32 +103,56 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: form,
           })
-          .catch(err => console.log(err));
+          .then(r => submitSuccess())
+          .catch((err) => {
+            console.log(err)
+            submitFail();
+          });
         }
-        catch (e) {
-            console.log('fetch not supported; ', e);
-            var xhr = new XMLHttpRequest();
-            xhr.open("POST", `https://formspree.io/${i}@gmail.com`, true);
-            //Send the proper header information along with the request
-            // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.send(form);
-          }
+        catch (err) {
+          console.log('fetch not supported; ', err);
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', `https://formspree.io/${i}@gmail.com`, true);
+          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          xhr.responseType = 'document';
+          // sets the state of the form depending on the status
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              xhr.abort();
+              submitSuccess();
+            }
+            else {
+              submitFail();
+              console.log(xhr.status);
+            }
+          };
+          xhr.send(form);
+        }
       });
 
-      button.innerHTML = 'Thanks for contacting me!';
-      button.style.backgroundColor = '#3b5998'
-      button.removeEventListener('click', sendMail)
-      if (e.path[1]) {
-        for (i=0; i < e.path[1].length; i++) {
-          e.path[1][i].value = '';
+      function submitSuccess() {
+        button.innerHTML = 'Thanks for contacting me!';
+        button.style.backgroundColor = '#3b5998'
+        button.removeEventListener('click', sendMail)
+        if (e.path[1]) {
+          for (i=0; i < e.path[1].length; i++) {
+            e.path[1][i].value = '';
+          }
         }
       }
+
+      function submitFail() {
+        button.innerHTML = 'Error with submission';
+        button.style.backgroundColor = '#FF4136';
+      }
+
     }
   } else {
     button.innerHTML = 'Please fill out all fields';
     button.style.backgroundColor = '#FF4136'
     }
   }
+
 
 buttonHandler();
 
