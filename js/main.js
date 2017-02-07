@@ -89,28 +89,25 @@ document.addEventListener('DOMContentLoaded', () => {
         button.style.backgroundColor = '#FF4136';
       } else {
       const emails = ['taft82'];
-      var xhr = new XMLHttpRequest();
-      emails.forEach( function(i) {
-        xhr.open("POST", 'https://formspree.io/'+i+'@gmail.com', true);
-        //Send the proper header information along with the request
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        // Call function when the state changes
-        // xhr.onreadystatechange = () => {
-        //     if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
-        //         console.log('sending form to' + i);
-        //     }
-        // }
-        xhr.send(form);
-        // needed to prevent redirect
-        // xhr.abort();
-      });
-      // emails.forEach((i) => {
-      //   fetch(`https://formspree.io/${i}@gmail.com`, {
-      //     method: 'POST',
-      //     body: form,
-      //   });
-      // });
+      emails.forEach((i) => {
+        try {
+          fetch(`https://formspree.io/${i}@gmail.com`, {
+            method: 'POST',
+            body: form,
+          })
+          .catch(err => console.log(err));
+        }
+        catch((e) => {
+          var xhr = new XMLHttpRequest();
+            xhr.open("POST", 'https://formspree.io/'+i+'@gmail.com', true);
+            //Send the proper header information along with the request
+            // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+            xhr.send(form);
+          });
+    });
+
 
 
       button.innerHTML = 'Thanks for contacting me!';
