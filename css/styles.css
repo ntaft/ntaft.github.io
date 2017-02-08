@@ -13,8 +13,17 @@ img, h1, h2, a {
   padding: 0 10px;
   }
 
-.feather {
+/*.feather {
   background: rgba(250, 250, 250, .8);
+}*/
+
+.radial-overlay {
+  background: -webkit-radial-gradient(rgba(255, 255, 255, .9) 40%, rgba(255, 255, 255, .2) 90%); /* Safari 5.1-6.0 */
+  background: -o-radial-gradient(rgba(255, 255, 255, .9) 40%, rgba(255, 255, 255, .2) 90%); /* For Opera 11.6-12.0 */
+  background: -moz-radial-gradient(rgba(255, 255, 255, .9) 40%, rgba(255, 255, 255, .2) 90%); /* For Firefox 3.6-15 */
+  background: radial-gradient(rgba(255, 255, 255, .8) 50%, rgba(255, 255, 255, .2) 90%); /* Standard syntax */
+  height: 100%;
+  width: 100%;
 }
 
 img {
@@ -29,7 +38,7 @@ img {
   left: 0;
   z-index: 0;
   background: rgba(250,250,250,1);
-/*  background-image: url("/assets/grey.png");*/
+  /*background-image: url("/assets/grey.png");*/
   /*background-repeat: repeat;*/
 }
 
@@ -63,8 +72,8 @@ a {
 }
 
 a:hover {
-/*  color: rgba(10, 10, 10, 1);*/
-  font-weight: bold;
+  color: rgba(70, 70, 70, 1);
+
 }
 
 nav > a {
@@ -109,7 +118,7 @@ p {
   /*float:left;*/
   position: relative;
   width: 33%;
-  padding-bottom: 33%; /* = width for a 1:1 aspect ratio */
+  padding-bottom: 33%;
   margin: 5%;
   background-color: rgba(20, 20, 20, .9);
   color: rgba(0, 0, 0, 0);
@@ -285,7 +294,7 @@ aside {
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: center;
-  background-color: snow;
+  background-color: rgba(255, 255, 255, .8);
   height: 520px;
   margin: 0px;
 }
