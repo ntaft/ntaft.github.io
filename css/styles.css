@@ -71,15 +71,14 @@ a {
   margin: 0;
 }
 
-a:hover {
-  color: rgba(70, 70, 70, 1);
-
-}
-
 nav > a {
   font-size: 1.5em;
   margin: 0 20px 0 20px;
   color: rgba(10, 10, 10, 1);
+}
+
+nav > a:hover {
+  color: rgba(70, 70, 70, 1);
 }
 
 p {
