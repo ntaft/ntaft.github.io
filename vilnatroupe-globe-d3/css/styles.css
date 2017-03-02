@@ -13,14 +13,18 @@
 .labels {
     font: 8px sans-serif;
     fill: black;
-    opacity: .5;
+    opacity: 0;
+}
 
-    display:none;
+.labels:hover {
+  opacity: 1;
 }
 
 .noclicks { pointer-events:none; }
 
-.point {  opacity:.6; }
+.point {
+  opacity: 0.6;
+}
 
 .arcs {
   opacity:.1;
@@ -29,7 +33,7 @@
 }
 .flyers {
   stroke-width:1;
-  opacity: .6;
+  opacity: 0.6;
   stroke: darkred;
 }
 .arc, .flyer {

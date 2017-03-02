@@ -334,17 +334,6 @@ button {
   box-shadow: 0 3px 5px #888888;
 }
 
-/*.headshot {
-  display: inline-block;
-  bottom: 20px;
-  right: 75px;
-  background-image: url("../assets/headshot.jpg");
-  border-radius: 50%;
-  width: 20%;
-  padding-bottom: 20%;
-  opacity: 1;
-}*/
-
 footer {
   text-align: center;
   margin: 0;

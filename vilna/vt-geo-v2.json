@@ -781,7 +781,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [41.700386, -71.156157]},
+    "geometry": {"type": "Point", "coordinates": [-71.156157, 41.700386]},
     "properties": {
       "Date": "June 4 1924",
       "Troupe": "AA",

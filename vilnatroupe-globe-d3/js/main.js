@@ -15,7 +15,7 @@ var proj = d3.geo.orthographic()
 var sky = d3.geo.orthographic()
     .translate([width / 2, height / 2])
     .clipAngle(90)
-    .scale(280);
+    .scale(260);
 
 var path = d3.geo.path().projection(proj).pointRadius(2);
 
@@ -137,8 +137,6 @@ function flying_arc(pts) {
                  proj(target) ]
   return result;
 }
-
-
 
 function refresh() {
   svg.selectAll(".land").attr("d", path);
