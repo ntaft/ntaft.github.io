@@ -1,4 +1,4 @@
-// // code borrowed from http://bl.ocks.org/dwtkns/4973620
+// // code adapted from http://bl.ocks.org/dwtkns/4973620
 
 d3.select(window)
     .on("mousemove", mousemove)
@@ -97,7 +97,7 @@ function ready(error, world, places) {
       .attr("class", "point")
       .attr("d", path);
 
-  // spawn links between cities as source/target coord pairs
+  // spawn links between locations as source/target coord pairs
   for (let i = 1; i < places.features.length; i++) {
     links.push({
       source: places.features[i-1].geometry.coordinates,

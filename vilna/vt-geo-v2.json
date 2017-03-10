@@ -408,7 +408,7 @@
     }
   },
   { "type": "Feature",
-    "geometry": {"type": "Point", "coordinates": [-0.134781, 51.51035]},
+    "geometry": {"type": "Point", "coordinates": [0.134781, 51.51035]},
     "properties": {
       "Date": "Summer 1922 - Winter 1923",
       "Troupe": "AA",

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const sendButton = document.querySelector('#send-button');
   const museumButton = document.querySelector('#museum-button')
   sendButton.onclick = sendMail;
-  museumButton.onclick = () => location.href = 'http://www.nytimes.com/2012/12/01/arts/design/the-perot-museum-of-nature-and-science-in-dallas.html'
+  // museumButton.onclick = () => location.href = 'http://www.nytimes.com/2012/12/01/arts/design/the-perot-museum-of-nature-and-science-in-dallas.html'
 }
 
   // function sendMail (e) {
@@ -197,6 +197,7 @@ buttonHandler();
   const canvasWidth = canvas.width // / getPixelRatio(context);
   const canvasHeight = canvas.height // / getPixelRatio(context);
 
+// // implementation of offscreen canvas is still shaky, but would speed up performance
 // board.offscreenCanvas = document.createElement("canvas");
 // board.offscreenCanvas.width = canvasHeight;
 // board.offscreenCanvas.height = canvasWidth;
@@ -292,7 +293,6 @@ buttonHandler();
       y = -1;
       yBound = 0;
       arrLen = board[0].length;
-      // Using array.map() to non-destructively iterate through, modify and return the game board.
       // using the format array = array.map(items=>items.map(item=>item))
       board = board.map( function (items) {
       y++;
@@ -334,13 +334,10 @@ buttonHandler();
   //         context.msBackingStorePixelRatio ||
   //         context.oBackingStorePixelRatio ||
   //         context.backingStorePixelRatio || 1;
-
   //   return (window.devicePixelRatio || 1) / backingStore;
   // };
 
-  // canvas.style.height = `${window.innerHeight}px`
-  // canvas.style.width = `${window.innerWidth}px`
-
+  // draws each 'dot' - currently changed to a rectangle.
   function drawDot(x, y, radius, color) {
     context.fillRect(x, y, radius*2, radius*2);
     // context.beginPath();
