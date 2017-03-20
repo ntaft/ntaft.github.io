@@ -1,70 +1,64 @@
-// () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-  console.log('loaded and ready to go');
+  // sets up canvas variables; sets width to window
+  const canvas = document.querySelector('.board');
+  const context = canvas.getContext('2d');
+  canvas.height = `${window.innerWidth}`;
+  canvas.width = `${window.innerWidth}`;
+  // context.globalAlpha=0.8;
 
-  var board = [];
-  var game = {
+  // sets up board variables
+  let board = [];
+  let gameOfLife;
+  let game = {
     rows: 50,
     columns: 50,
-    speed: 100,
+    margin: 1,
+    speed: 200, // in ms per gen
     density: 1.2,
-    pxWide: document.querySelector('.board').style.width,
-    pxHigh: document.querySelector('.board').style.height
+    cellColor: '#3b5998',
+    background: 'rgb(250, 250, 250)',
+    generations: 0,
   };
 
-const canvas = document.querySelector('.board');
-  const context = canvas.getContext('2d');
+  // variables for onscreen dot
+  // adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
+  let dot = {
+    width: ((canvas.width - (2 * game.margin)) / game.columns) - game.margin,
+    height: ((canvas.height - (2 * game.margin)) / game.rows) - game.margin,
+  };
 
-
-  // // pixel ratio adjuster via https://github.com/jondavidjohn/hidpi-canvas-polyfill
-  // var getPixelRatio = function(context) {
-  //   var backingStore = context.backingStorePixelRatio ||
-  //         context.webkitBackingStorePixelRatio ||
-  //         context.mozBackingStorePixelRatio ||
-  //         context.msBackingStorePixelRatio ||
-  //         context.oBackingStorePixelRatio ||
-  //         context.backingStorePixelRatio || 1;
-
-  //   return (window.devicePixelRatio || 1) / backingStore;
-  // };
-
-  const dotMargin = 1;
-  const numRows = game.rows;
-  const numCols = game.columns;
-
-  const canvasWidth = canvas.clientWidth // / getPixelRatio(context);
-  const canvasHeight = canvas.clientHeight // / getPixelRatio(context);
-
-//   board.offscreenCanvas = document.createElement("canvas");
-// board.offscreenCanvas.width = canvasHeight;
-// board.offscreenCanvas.height = canvasWidth;
+// // implementation of offscreen canvas is still shaky, but might speed up performance...
+// board.offscreenCanvas = document.createElement("canvas");
+// board.offscreenCanvas.width = canvas.height;
+// board.offscreenCanvas.height = canvas.width;
 // board.offscreenContext = board.offscreenCanvas.getContext("2d");
 
   // adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
   // Because we don't know which direction (x vs. y) is the limiting sizing
   // factor, we'll calculate both first.
-  const dotWidth = ((canvasWidth - (2 * dotMargin)) / numCols) - dotMargin;
-  const dotHeight = ((canvasHeight - (2 * dotMargin)) / numRows) - dotMargin;
-  // Now, we use the limiting dimension to set the diameter.
-  if( dotWidth > dotHeight )
+
+  // Uses the limiting dimension to set the diameter.
+  if( dot.width > dot.height )
   {
-    var dotDiameter = dotHeight;
-    var xMargin = (canvasWidth - ((2 * dotMargin) + (numCols * dotDiameter))) / numCols;
-    var yMargin = dotMargin;
+    dot.diameter = dot.height;
+    dot.xMargin = (canvas.width - ((2 * game.margin) + (game.columns * dot.diameter))) / game.columns;
+    dot.yMargin = game.margin;
   }
   else
-  { var dotDiameter = dotWidth;
-    var xMargin = dotMargin;
-    var yMargin = (canvasHeight - ((2 * dotMargin) + (numRows * dotDiameter))) / numRows;
+  { dot.diameter = dot.width;
+    dot.xMargin = game.margin;
+    dot.yMargin = (canvas.height - ((2 * game.margin) + (game.rows * dot.diameter))) / game.rows;
   }
   // Radius is still half of the diameter, because ... math.
-  var dotRadius = Math.abs(dotDiameter) * 0.5;
+  dot.radius = Math.abs(dot.diameter) * 0.5;
 
 
 
   // initializes a new board, and randomly seeds it with new 'life' i.e. red squares / 1's
   function initBoard () {
-
+    game.generations = 0;
+    board = [];
    for (var r=0; r < game.rows; r++) {
         board.push([]);
    };
@@ -72,14 +66,13 @@ const canvas = document.querySelector('.board');
    for (var row = 0; row < game.rows; row++) {
     for (var column = 0; column < game.columns; column++) {
       var randNum = Math.floor(Math.random()*game.density);
-      // var randNum = 1; //for testing
       board[row].push(randNum);
     }
   }
 }
 
   // creates and returns an array full of 0's
-  function clearBoard() {
+  function zeroBoard() {
     board = [];
   for (var r=0; r < game.rows; r++) {
         board.push([]);
@@ -93,11 +86,11 @@ const canvas = document.querySelector('.board');
 
   // sums up and returns all the neighbors values in the array
   // checks to see if the neighbor position is out of bounds
-  function neighborSum (x, y)  {
-    var sum = 0;
+  function neighborSum(x, y) {
+    let sum = 0;
     xBound = game.columns - 1;
     yBound = game.rows - 1;
-    var b = board;
+    let b = board;
 
     if ((x === 0) && (y === 0)){
       sum =  b[x+1][y+1]+ b[x+1][y] + b[x][y+1];
@@ -122,73 +115,151 @@ const canvas = document.querySelector('.board');
     return sum;
   }
 
-    function lifeGen() {
-      context.clearRect( 0, 0, canvasWidth, canvasHeight)
-      x = 0;
-      y = -1;
-      yBound = 0;
-      arrLen = board[0].length;
-      // Using array.map() to non-destructively iterate through, modify and return the game board.
-      // using the format array = array.map(items=>items.map(item=>item))
-      board = board.map( function (items) {
-      y++;
-      return items.map( function (cellVal) {
-         // resets the board length counter to prevent overflow
-         if (x === arrLen) {
-           x = 0;
-         };
-         var neighbors = neighborSum (y, x);
-         var state = null;
-         // Basic rules of the Game of Life:
-         // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
-
-          var xPos = (x * (dotDiameter + xMargin)) + dotMargin + (xMargin / 2) + dotRadius;
-          var yPos = (y * (dotDiameter + yMargin)) + dotMargin + (yMargin / 2) + dotRadius;
-
-          if ((cellVal === 1) && (( neighbors <= 3 ) && (neighbors >= 2))) {
-           state = 1;
-           drawDot(xPos, yPos, dotRadius, '#F03C69');
-         // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
-         } else if ((cellVal === 0) && (neighbors === 3)) {
-           state = 1;
-            drawDot(xPos, yPos, dotRadius, '#F03C69');
-         } else {
-           state = 0;
-           // context.clearRect( xPos, yPos, dotRadius*2, dotRadius*2);
-         };
-         x++;
-         return state;
-       });
+  function lifeGen() {
+    clearDots();
+    game.generations += 1;
+    document.querySelector('.gen').innerHTML = `Generation:<br>${game.generations}`;
+    context.fillStyle = game.cellColor;
+    let x = 0,
+        y = -1,
+        arrLen = board[0].length;
+    // using the format array = array.map(items=>items.map(item=>item))
+    board = board.map( function (items) {
+    y++;
+    return items.map( function (cellVal) {
+     // resets the board length counter to prevent overflow
+      if (x === arrLen) {
+        x = 0;
+      };
+      const neighbors = neighborSum (y, x);
+      var state = null;
+       // Basic rules of Conway's Game of Life:
+       // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
+       if ((cellVal === 1) && ((neighbors <= 3 ) && (neighbors >= 2))) {
+         state = 1;
+         drawDot(x, y, dot.radius);
+      // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
+      } else if ((cellVal === 0) && (neighbors === 3)) {
+        state = 1;
+        drawDot(x, y, dot.radius);
+      } else {
+        state = 0;
+      }
+      x += 1;
+      return state;
       });
-      // board.render(board.offscreenContext);
-    }
+    });
+  }
 
-  // // pixel ratio adjuster via https://github.com/jondavidjohn/hidpi-canvas-polyfill
-  // var getPixelRatio = function(context) {
-  //   var backingStore = context.backingStorePixelRatio ||
-  //         context.webkitBackingStorePixelRatio ||
-  //         context.mozBackingStorePixelRatio ||
-  //         context.msBackingStorePixelRatio ||
-  //         context.oBackingStorePixelRatio ||
-  //         context.backingStorePixelRatio || 1;
-
-  //   return (window.devicePixelRatio || 1) / backingStore;
-  // };
-
-  // canvas.style.height = `${window.innerHeight}px`
-  // canvas.style.width = `${window.innerWidth}px`
-
+  // draws each 'dot' - currently in the shape of a rectangle.
   function drawDot(x, y, radius, color) {
-        context.fillStyle = color;
-    context.fillRect(x, y, radius*2, radius*2)
+    // calculates the dot positioning based on the px margin, px diameter and board position
+    const xPos = (x * (dot.diameter + dot.xMargin)) + game.margin + (dot.xMargin / 2) + dot.radius;
+    const yPos = (y * (dot.diameter + dot.yMargin)) + game.margin + (dot.yMargin / 2) + dot.radius;
+    context.fillRect(xPos, yPos, radius * 2, radius * 2);
     // context.beginPath();
     // context.arc(x, y, radius, 0, 2 * Math.PI, false);
     // context.fill();
   }
+  // overlays the board with a blank rectangle
+  function clearDots() {
+    context.fillStyle = 'rgba(250, 250, 250, 0.7)';
+    context.fillRect( 0, 0, canvas.width, canvas.height);
+  }
 
- initBoard();
- var gameOfLife = setInterval(lifeGen, game.speed);
+  // button handlers
+  document.querySelector('.pause').addEventListener('click', pauseHandler);
+  document.querySelector('.step').addEventListener('click', stepHandler);
+  document.querySelector('.reset').addEventListener('click', resetHandler);
+  document.querySelector('.clear').addEventListener('click', clearHandler);
 
-//end of the DOM load script
-// };
+  // event listeners for edit functionality
+  document.addEventListener('mousedown', toggleCell);
+  document.addEventListener('mouseup', () => document.removeEventListener('mousemove', dragCell));
 
+  // pauses / unpauses the animation on click
+  function pauseHandler(e) {
+    let button = document.querySelector('.pause');
+    e.stopPropagation();
+    if (gameOfLife) {
+      clearInterval(gameOfLife);
+      gameOfLife = null;
+      button.style.backgroundImage = 'url("assets/play.svg")';
+    }
+    else {
+      gameOfLife = setInterval(lifeGen, game.speed);
+      button.style.backgroundImage = 'url("assets/pause.svg")';
+    }
+  }
+
+  // allows a single generation 'step' followed by pausing the animation.
+  function stepHandler() {
+    if (gameOfLife) {
+      clearInterval(gameOfLife);
+      gameOfLife = null;
+      document.querySelector('.pause').style.backgroundImage = 'url("assets/play.svg")'
+    }
+    lifeGen();
+  }
+
+  // resets the board to default state
+  function resetHandler() {
+    clearInterval(gameOfLife);
+    clearDots()
+    initBoard();
+    if (gameOfLife) gameOfLife = setInterval(lifeGen, game.speed);
+    else lifeGen();
+  }
+
+  // zeroes out the board to a blank state
+  function clearHandler() {
+    zeroBoard();
+    clearDots();
+  }
+
+  // helper class that gets/sets the cell state and draws to canvas given the px coordinates
+  class Cell {
+    constructor(xPos, yPos) {
+      // converts the on screen position to the 2d array position
+      this.x = Math.floor((xPos / (dot.diameter + dot.xMargin)) - (dot.xMargin / 2));
+      this.y = Math.floor((yPos / (dot.diameter + dot.yMargin)) - (dot.yMargin / 2));
+    }
+    // getter and setter for the cell state, 0 or 1
+    get state() {
+      return board[this.y][this.x];
+    }
+    set state(val) {
+      board[this.y][this.x] = val;
+    }
+    // flips the cell bit to the designated state and draws to canvas
+    draw(bit) {
+      if (this.state != bit) {
+        this.state = bit;
+        context.fillStyle = bit ? game.cellColor : game.background;
+        drawDot(this.x, this.y, dot.radius);
+      }
+    }
+  }
+
+  // toggles the cell state on click; shift removes cells
+  function toggleCell(e) {
+    e.stopPropagation();
+    const mousePos = new Cell(e.clientX, e.clientY);
+    e.shiftKey ? mousePos.draw(0) : mousePos.draw(1);
+    document.addEventListener('mousemove', dragCell);
+  }
+
+  // toggles cell state on click and drag
+  function dragCell(e){
+    e.stopPropagation();
+    if ((0 < e.clientX && e.clientX < canvas.width) && (0 < e.clientY && e.clientY < canvas.height)) {
+      const dragPos = new Cell(e.clientX, e.clientY);
+      e.shiftKey ? dragPos.draw(0) : dragPos.draw(1);
+    }
+  }
+
+  // sets the initial board state and speed
+  initBoard();
+  gameOfLife = setInterval(lifeGen, game.speed);
+
+});

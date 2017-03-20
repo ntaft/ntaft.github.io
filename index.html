@@ -3,13 +3,40 @@
   <head>
     <meta charset="utf-8">
     <title>Nick Taft</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+    <link type="text/css" rel="stylesheet" href="css/gol.css"/>
+
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script type="text/javascript" src="js/gol.js"></script>
   </head>
   <body>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <canvas class="board" position="absolute" top="0" left="0" width="200px" height="200px">
     </canvas>
+    <div class="control-box">
+      <div class="settings btn">
+      </div>
+      <div class="pause btn">
+      </div>
+      <div class="step btn">
+      </div>
+      <div class="reset btn">
+      </div>
+      <div class="clear btn">
+      </div>
+      <div class="gen-box">
+        <span class="gen">
+        </span>
+      </div>
+      <div class="info">
+        <div>Interactive Game of Life -- by Nick Taft, on <a href="http://www.github.com/ntaft/gol-bg"> GitHub</a>.
+        </div>
+        <div>
+          Click and drag to create cells; shift-click to remove.
+        </div>
+      </div>
+    </div>
     <section>
         <header class="radial-overlay">
           <h1>Nick Taft</h1>
@@ -40,12 +67,7 @@
         <h2>ABOUT ME</h2>
           <div class="about-text">
             <p>
-              <!-- I am an engaged and passionate coder, with a lifelong love of learning. From tinkering in the garage to tinkering with code, I enjoy coming up with novel solutions to complex problems. Through extensive research, collaboration and dedication, I support my team to ensure successful results and share my knowledge, compassion and enthusiasm to resolve any issue.
-
-              I am an engaged and passionate coder with a lifelong love of learning. From tinkering in the garage to tinkering with code, I enjoy coming up with creative solutions to complex problems. I thrive on taking on projects both big and small, from developing critically-acclaimed sceince museum exhibits to perfecting a home-brewed beer recipe. Through research, collaboration and dedication, I support my team to ensure results and share my knowledge, compassion and enthusiasm to tackle any problem and achieve success. -->
-
-              <b> I code to solve problems. From building innovative responsive websites to tinkering in the garage, I enjoy coming up with creative solutions to complex problems. I'm analytical and detail-oriented, and I thrive on creating work that is meaningful and inspiring.</b>
-
+              I code to solve problems. From building innovative responsive websites to tinkering in the garage, I enjoy coming up with creative solutions to complex problems. I'm analytical and detail-oriented, and I thrive on creating work that is meaningful and inspiring.
             </p>
           </div>
         </div>
@@ -173,15 +195,15 @@
 
   <footer>
   </footer>
+<!--     <CORSConfiguration>
+      <CORSRule>
+          <AllowedOrigin>*</AllowedOrigin>
+          <AllowedMethod>GET</AllowedMethod>
+          <MaxAgeSeconds>3000</MaxAgeSeconds>
+          <AllowedHeader>Authorization</AllowedHeader>
+      </CORSRule>
+    </CORSConfiguration> -->
 
-  <CORSConfiguration>
-    <CORSRule>
-        <AllowedOrigin>*</AllowedOrigin>
-        <AllowedMethod>GET</AllowedMethod>
-        <MaxAgeSeconds>3000</MaxAgeSeconds>
-        <AllowedHeader>Authorization</AllowedHeader>
-    </CORSRule>
-  </CORSConfiguration>
 
   <script type="text/javascript" src="js/main.js"></script>
   </body>
