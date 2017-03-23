@@ -12,8 +12,6 @@ $( document ).ready( function() {
     pxHigh: $('.board').height()
   };
 
-
-
   // stores all the player values, including coordinates
   var player = {
     x: 0,
@@ -23,7 +21,8 @@ $( document ).ready( function() {
     width: $('.player').width(),
     projectiles: 0,
     projInt: null,
-    projID: 0
+    projID: 0,
+    score: 0
   }
 
   var enemy = {
@@ -85,21 +84,6 @@ $( document ).ready( function() {
     var position = ['#', x, '-', y].join('');
     return $(position);
   }
-
-  // for (var row = 0; row < 10; row++) {
-  //   for (var column = 0; column < 10; column++) {
-  //     var $myBox = getBox(row, column);
-  //     var r = Math.floor(255 * Math.random());
-  //     var g = Math.floor(255 * Math.random());
-  //     var b = Math.floor(255 * Math.random());
-  //     var sqColor = 'rgba('+[r, g, b, '1'].join(',')+')';
-  //     $myBox.css('visibitity', sqColor);
-  //   };
-  // };
-
-
-
-
 
   // sums up and returns all the neighbors values in the array
   // checks to see if the neighbor position is out of bounds
@@ -163,7 +147,7 @@ $( document ).ready( function() {
             getBox(x, y).css('background', 'red');
          } else {
            state = 0;
-           getBox(x, y).css('background', 'white');
+           getBox(x, y).css('background', 'transparent');
          };
          x++;
          return state;
@@ -230,9 +214,6 @@ function initMove() {
       }
   };
 
-
-
-
   // translates the position of the player depending on their angle
   // also does wall detection
   function movePlr(dir){
@@ -254,8 +235,6 @@ function initMove() {
     $('.player').css({transform: 'rotate(' + player.angle + 'deg)'}, 200);
   }
 
-
-
 function collisionDetect () {
   var touchCells = 0;
   var boardX = player.x / cell.width;
@@ -275,7 +254,7 @@ function collisionDetect () {
 }
 
 function injurePlayer (){
-  player.hp -= 3;
+  player.hp -= 10;
   var health = player.hp + 'px';
   $('.healthbar').css("width", health);
   if (player.hp <= 0) {
@@ -307,7 +286,7 @@ function injurePlayer (){
   function initProj() {
     if (player.projectiles === 0) {
       player.projectiles ++;
-      player.projInt = setInterval(eachProj, 100)
+      player.projInt = setInterval(eachProj, 50)
     } else {
       player.projectiles ++;
     };
@@ -331,13 +310,13 @@ function injurePlayer (){
       var projectileID = '<div class="projectile" ID="' + player.projID + 'p"></div>';
       player.projID ++;
       var projSpeed = 5;
-      $projectile = $(projectileID);
+      var $projectile = $(projectileID);
       $('.board').append($projectile);
       console.log($projectile);
       projectileID = '#'+ player.projectiles + 'p';
       var projAngle = launderVar(player.angle)
-      xAngle = Math.cos((Math.PI/180) * projAngle) * projSpeed;
-      yAngle = Math.sin((Math.PI/180) * projAngle) * projSpeed;
+      var xAngle = Math.cos((Math.PI/180) * projAngle) * projSpeed;
+      var yAngle = Math.sin((Math.PI/180) * projAngle) * projSpeed;
       console.log (xAngle, yAngle, player.angle)
       var projX = player.x + (player.width / 2)
       var projY = player.y + (player.width / 2)
@@ -382,7 +361,7 @@ function moveProj(projID){
   $(projID).animate({
     left: projectiles[projID].x +'px',
     top: projectiles[projID].y+'px'
-  }, 0);
+  }, 10);
 }
 // if a projectile collision is detected, set the value and color of the cell
 function cellHit (projID) {
@@ -394,9 +373,11 @@ function cellHit (projID) {
   touchCell = board[boardX][boardY];
   if (touchCell > 0) {
     board[boardY][boardX] = 0;
-    var $cell = getBox(boardY, boardX)
-    $cell.css('background', 'white');
+    var $cell = getBox(boardY, boardX);
+    $cell.css('background', 'gray');
     console.log ($cell, " has been destroyed at ", boardX, boardY);
+    player.score ++;
+    $('.score').html(player.score);
     //removes the projectile from the board
     $(projID).remove();
     delete projectiles[projID];
