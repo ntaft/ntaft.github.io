@@ -13,18 +13,14 @@
 .labels {
     font: 8px sans-serif;
     fill: black;
-    opacity: 0;
-}
+    opacity: .5;
 
-.labels:hover {
-  opacity: 1;
+    display:none;
 }
 
 .noclicks { pointer-events:none; }
 
-.point {
-  opacity: 0.6;
-}
+.point {  opacity:.6; }
 
 .arcs {
   opacity:.1;
@@ -33,7 +29,7 @@
 }
 .flyers {
   stroke-width:1;
-  opacity: 0.6;
+  opacity: .6;
   stroke: darkred;
 }
 .arc, .flyer {
@@ -46,3 +42,39 @@
     stroke-width:4;
     opacity: 1;
   }
+
+/* temp solution - colors of the fliers based on the troupe name*/
+
+#O {
+  stroke: darkblue;
+}
+
+#AA {
+  stroke: darkred;
+}
+
+#MVT {
+  stroke: darkgreen;
+}
+
+#AmRev {
+  stroke: goldenrod;
+}
+
+#Bronx {
+  stroke: purple;
+}
+
+#Belgium {
+  stroke: pink;
+}
+
+#Stein {
+  stroke: brown;
+}
+
+
+
+
+/*"O", "AA", "MVT", "AA ", "AmRev", "Bronx", "Belgium", "Stein"
+*/
