@@ -1,7 +1,6 @@
 body {
   font-family: 'Lato', verdana, sans-serif;
   color: black;
-  /*height: 100%;*/
   width: 100%;
   margin: 0;
   background: rgba(250,250,250,1);
@@ -12,10 +11,6 @@ img, h1, h2, a {
   z-index: 2;
   padding: 0 10px;
   }
-
-/*.feather {
-  background: rgba(250, 250, 250, .8);
-}*/
 
 .radial-overlay {
   background: -webkit-radial-gradient(rgba(255, 255, 255, .9) 40%, rgba(255, 255, 255, .2) 90%); /* Safari 5.1-6.0 */
@@ -42,8 +37,6 @@ img {
   left: 0;
   z-index: 0;
   background: rgba(250,250,250,1);
-  /*background-image: url("/assets/grey.png");*/
-  /*background-repeat: repeat;*/
 }
 
 header {
@@ -107,10 +100,8 @@ p {
   text-align: center;
   box-sizing: border-box;
   padding: 0 10px;
+  max-width: 900px;
 }
-
-
-
 
 .skill-bar {
   display: flex;
@@ -157,8 +148,6 @@ p {
   opacity: 1;
   font-weight: normal;
 }
-
-
 
 .logos {
   height: 20px;
@@ -207,37 +196,6 @@ li{
   color: #fff;
 }
 
-.blur {
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
-}
-
-/*.circle {
-  height: 200px;
-  width: 200px;
-  position: relative;
-  border-radius: 50%;
-  left: -10px;
-  top: -10px;
-  background-color: darkgrey;
-  opacity: 0.7;
-}*/
-
-
-/*.down-arrow {
-  height: 50px;
-  width: 50px;
-  background-color: darkgrey;
-  border-radius: 50%;
-  font-size: 40px;
-  position: absolute;
-  top: 0px
-  left: 50%;
-}*/
-
 #second-section {
   background-color: rgba(255, 255, 255, .8);
   color: black;
@@ -250,6 +208,7 @@ li{
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  padding: 50px 0 20px 0;
 }
 
 .portfolio-block {
@@ -313,7 +272,6 @@ aside {
 .contact-container {
   text-align: center;
   position: relative;
-  /*background: darkgrey;*/
   left: 20px;
   height: 400px;
   display: inline-block;
@@ -349,6 +307,5 @@ button {
 
 footer {
   text-align: center;
-  margin: 0;
-  background-color: grey;
+  margin: 10px;
 }
