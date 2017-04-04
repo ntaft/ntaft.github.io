@@ -3,8 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // sets up canvas variables; sets width to window
   const canvas = document.querySelector('.board');
   const context = canvas.getContext('2d');
-  canvas.height = `${window.innerWidth}`;
-  canvas.width = `${window.innerWidth}`;
+  const greatestDim = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+  canvas.height = greatestDim;
+  canvas.width = greatestDim;
   // context.globalAlpha=0.8;
 
   // sets up board variables
