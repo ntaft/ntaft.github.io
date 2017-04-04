@@ -3,15 +3,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // sets up canvas variables; sets height / width to window
   const canvas = document.querySelector('.board');
   const context = canvas.getContext('2d');
-  setCanvasDim();
 
-  function setCanvasDim() {
-    const greatestDim = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
-    canvas.height = greatestDim;
-    canvas.width = greatestDim;
-  }
+
 
   // sets up board variables
+  const dot = {};
   let board = [];
   let gameOfLife;
   const game = {
@@ -25,11 +21,27 @@ document.addEventListener('DOMContentLoaded', () => {
     generations: 0,
   };
 
-  // variables for onscreen dot
-  let dot = {
-    width: ((canvas.width - (2 * game.margin)) / game.columns) - game.margin,
-    height: ((canvas.height - (2 * game.margin)) / game.rows) - game.margin,
-  };
+  // Sets canvas dimensions and corresponding dot and margin size; redraws canvas
+  function setDimensions() {
+    const greatestDim = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+    canvas.height = greatestDim;
+    canvas.width = greatestDim;
+    dot.width = ((canvas.width - (2 * game.margin)) / game.columns) - game.margin;
+    dot.height = ((canvas.height - (2 * game.margin)) / game.rows) - game.margin;
+    // Adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
+    // Uses the limiting dimension to set the diameter
+    if (dot.width > dot.height) {
+      dot.diameter = dot.height;
+      dot.xMargin = (canvas.width - ((2 * game.margin) + (game.columns * dot.diameter))) / game.columns;
+      dot.yMargin = game.margin;
+    } else {
+      dot.diameter = dot.width;
+      dot.xMargin = game.margin;
+      dot.yMargin = (canvas.height - ((2 * game.margin) + (game.rows * dot.diameter))) / game.rows;
+    }
+    // triggers redraw, and advances generation as a side effect
+    lifeGen();
+  }
 
 // // implementation of offscreen canvas is still shaky on many browsers...
 // // but might speed up performance
@@ -42,19 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // // copy onto the visible canvas
 // context.putImageData(image, 0, 0);
 
-  // adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
-  // Uses the limiting dimension to set the diameter.
-  if (dot.width > dot.height) {
-    dot.diameter = dot.height;
-    dot.xMargin = (canvas.width - ((2 * game.margin) + (game.columns * dot.diameter))) / game.columns;
-    dot.yMargin = game.margin;
-  } else {
-    dot.diameter = dot.width;
-    dot.xMargin = game.margin;
-    dot.yMargin = (canvas.height - ((2 * game.margin) + (game.rows * dot.diameter))) / game.rows;
-  }
-  // calculating radius (used for circular dots)
-  dot.radius = Math.abs(dot.diameter) * 0.5;
 
   // initializes a new board, and randomly seeds it with new 'life' i.e. 1's
   function initBoard () {
@@ -138,11 +137,11 @@ document.addEventListener('DOMContentLoaded', () => {
        // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
        if ((cellVal === 1) && ((neighbors <= 3 ) && (neighbors >= 2))) {
          state = 1;
-         drawDot(x, y, dot.radius);
+         drawDot(x, y, dot.diameter);
       // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
       } else if ((cellVal === 0) && (neighbors === 3)) {
         state = 1;
-        drawDot(x, y, dot.radius);
+        drawDot(x, y, dot.diameter);
       } else {
         state = 0;
       }
@@ -153,15 +152,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // draws each 'dot' - currently in the shape of a rectangle.
-  function drawDot(x, y, radius, color) {
+  function drawDot(x, y, diameter, color) {
     // calculates the dot positioning based on the px margin, px diameter and board position
     const xPos = (x * (dot.diameter + dot.xMargin)) + game.margin + (dot.xMargin / 2);
     const yPos = (y * (dot.diameter + dot.yMargin)) + game.margin + (dot.yMargin / 2);
     if (xPos < canvas.width && yPos < canvas.height){
-      context.fillRect(xPos, yPos, radius * 2, radius * 2);
+      context.fillRect(xPos, yPos, diameter, diameter);
     }
+    // for circles...
     // context.beginPath();
-    // context.arc(x, y, radius, 0, 2 * Math.PI, false);
+    // context.arc(x, y, diameter / 2, 0, 2 * Math.PI, false);
     // context.fill();
   }
   // overlays the board with a blank rectangle
@@ -261,8 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // sets initial board dimensions
   // sets the initial board state and speed
   initBoard();
+  setDimensions();
   gameOfLife = setInterval(lifeGen, game.speed);
+  // event listener on window resize; resets dimensions and triggers redraw
+  window.addEventListener('resize', setDimensions);
 
 });
