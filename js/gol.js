@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // sets up canvas variables; sets height / width to window
+  // sets up canvas variables
   const canvas = document.querySelector('.board');
   const context = canvas.getContext('2d');
-
-
 
   // sets up board variables
   const dot = {};
@@ -156,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // calculates the dot positioning based on the px margin, px diameter and board position
     const xPos = (x * (dot.diameter + dot.xMargin)) + game.margin + (dot.xMargin / 2);
     const yPos = (y * (dot.diameter + dot.yMargin)) + game.margin + (dot.yMargin / 2);
-    if (xPos < canvas.width && yPos < canvas.height){
+    if (xPos < canvas.width && yPos < canvas.height) {
       context.fillRect(xPos, yPos, diameter, diameter);
     }
     // for circles...
@@ -239,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (this.state != bit) {
         this.state = bit;
         context.fillStyle = bit ? game.cellColor : game.background;
-        drawDot(this.x, this.y, dot.radius);
+        drawDot(this.x, this.y, dot.diameter);
       }
     }
   }
