@@ -1,17 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  // sets up canvas variables; sets width to window
+  // sets up canvas variables; sets height / width to window
   const canvas = document.querySelector('.board');
   const context = canvas.getContext('2d');
-  const greatestDim = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
-  canvas.height = greatestDim;
-  canvas.width = greatestDim;
-  // context.globalAlpha=0.8;
+  setCanvasDim();
+
+  function setCanvasDim() {
+    const greatestDim = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+    canvas.height = greatestDim;
+    canvas.width = greatestDim;
+  }
 
   // sets up board variables
   let board = [];
   let gameOfLife;
-  let game = {
+  const game = {
     rows: 50,
     columns: 50,
     margin: 1,
@@ -23,40 +26,37 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // variables for onscreen dot
-  // adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
   let dot = {
     width: ((canvas.width - (2 * game.margin)) / game.columns) - game.margin,
     height: ((canvas.height - (2 * game.margin)) / game.rows) - game.margin,
   };
 
-// // implementation of offscreen canvas is still shaky, but might speed up performance...
+// // implementation of offscreen canvas is still shaky on many browsers...
+// // but might speed up performance
 // board.offscreenCanvas = document.createElement("canvas");
 // board.offscreenCanvas.width = canvas.height;
 // board.offscreenCanvas.height = canvas.width;
 // board.offscreenContext = board.offscreenCanvas.getContext("2d");
+// // grabs the offscreen image
+// let image = board.offscreenContext.getImageData(0, 0, canvas.height, canvas.width);
+// // copy onto the visible canvas
+// context.putImageData(image, 0, 0);
 
   // adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
-  // Because we don't know which direction (x vs. y) is the limiting sizing
-  // factor, we'll calculate both first.
-
   // Uses the limiting dimension to set the diameter.
-  if( dot.width > dot.height )
-  {
+  if (dot.width > dot.height) {
     dot.diameter = dot.height;
     dot.xMargin = (canvas.width - ((2 * game.margin) + (game.columns * dot.diameter))) / game.columns;
     dot.yMargin = game.margin;
-  }
-  else
-  { dot.diameter = dot.width;
+  } else {
+    dot.diameter = dot.width;
     dot.xMargin = game.margin;
     dot.yMargin = (canvas.height - ((2 * game.margin) + (game.rows * dot.diameter))) / game.rows;
   }
-  // Radius is still half of the diameter, because ... math.
+  // calculating radius (used for circular dots)
   dot.radius = Math.abs(dot.diameter) * 0.5;
 
-
-
-  // initializes a new board, and randomly seeds it with new 'life' i.e. red squares / 1's
+  // initializes a new board, and randomly seeds it with new 'life' i.e. 1's
   function initBoard () {
     game.generations = 0;
     board = [];
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let x = 0,
         y = -1,
         arrLen = board[0].length;
-    // using the format array = array.map(items=>items.map(item=>item))
+    // using the format array = array.map(rows=>rows.map(cell=>cell));
     board = board.map( function (items) {
     y++;
     return items.map( function (cellVal) {
@@ -155,9 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // draws each 'dot' - currently in the shape of a rectangle.
   function drawDot(x, y, radius, color) {
     // calculates the dot positioning based on the px margin, px diameter and board position
-    const xPos = (x * (dot.diameter + dot.xMargin)) + game.margin + (dot.xMargin / 2) + dot.radius;
-    const yPos = (y * (dot.diameter + dot.yMargin)) + game.margin + (dot.yMargin / 2) + dot.radius;
-    context.fillRect(xPos, yPos, radius * 2, radius * 2);
+    const xPos = (x * (dot.diameter + dot.xMargin)) + game.margin + (dot.xMargin / 2);
+    const yPos = (y * (dot.diameter + dot.yMargin)) + game.margin + (dot.yMargin / 2);
+    if (xPos < canvas.width && yPos < canvas.height){
+      context.fillRect(xPos, yPos, radius * 2, radius * 2);
+    }
     // context.beginPath();
     // context.arc(x, y, radius, 0, 2 * Math.PI, false);
     // context.fill();
@@ -221,9 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // helper class that gets/sets the cell state and draws to canvas given the px coordinates
   class Cell {
     constructor(xPos, yPos) {
-      // converts the on screen position to the 2d array position
-      this.x = Math.floor((xPos / (dot.diameter + dot.xMargin)) - (dot.xMargin / 2));
-      this.y = Math.floor((yPos / (dot.diameter + dot.yMargin)) - (dot.yMargin / 2));
+      // converts the on screen px position to the 2d array position
+      this.x = Math.floor(xPos / (dot.diameter + dot.xMargin));
+      this.y = Math.floor(yPos / (dot.diameter + dot.yMargin));
     }
     // getter and setter for the cell state, 0 or 1
     get state() {
