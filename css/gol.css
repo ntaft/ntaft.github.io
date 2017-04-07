@@ -22,7 +22,7 @@
 
 
 
-.control-box:hover {
+.control-box:hover, .control-box:active {
   animation: expand .8s forwards;
 }
 
@@ -121,11 +121,6 @@
   }
 }
 
-/*.board {
-  margin: 0;
-  padding: 0;
-}*/
-
 .btn {
   height: 30px;
   width: 30px;
@@ -147,7 +142,7 @@
   background-image: url('../assets/gear.svg');
 }
 
-.settings:hover {
+.settings:hover, .settings:active {
   animation: short-spin 1s;
 }
 
