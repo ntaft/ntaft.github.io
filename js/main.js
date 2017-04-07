@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    // simply checks forms for completion and validation
   function formValid(f) {
-    // safari hates formData, so just going with DOM manipulation here
+    // safari hates FormData, so just going with DOM manipulation here
     let test = true;
     const form = {
       name: document.querySelector('input[name=name]').value,
@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function sendMail(e) {
     e.preventDefault();
     const button = document.querySelector('#send-button');
+
     const form = new FormData(document.getElementById('send-message'));
     const isFilled = formValid(form);
     if (isFilled) {
@@ -43,39 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
       const emails = ['taft82'];
       button.innerHTML = 'Sending...';
-      // I like fetch, safari hates it. gonna try it anyway
+      // sends to multiple addresses. I prefer fetch, but xhr is more compatible.
       emails.forEach((i) => {
-        try {
-          fetch(`https://formspree.io/${i}@gmail.com`, {
-            mode: 'no-cors',
-            method: 'POST',
-            body: form,
-          })
-          .then(r => submitSuccess())
-          .catch((err) => {
-            console.log(err)
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `https://formspree.io/${i}@gmail.com`, true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Accept', 'application/json');
+        // sets the state of the form depending on the status
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            xhr.abort();
+            submitSuccess();
+          } else {
             submitFail();
-          });
-        }
-        catch (err) {
-          console.log('fetch not supported; ', err);
-          const xhr = new XMLHttpRequest();
-          xhr.open('POST', `https://formspree.io/${i}@gmail.com`, true);
-          xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          xhr.responseType = 'document';
-          // sets the state of the form depending on the status
-          xhr.onreadystatechange = () => {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-              xhr.abort();
-              submitSuccess();
-            }
-            else {
-              submitFail();
-              console.log(xhr.status);
-            }
-          };
-          xhr.send(form);
-        }
+            console.log(xhr.status);
+          }
+        };
+        xhr.send(form);
       });
 
       function submitSuccess() {
@@ -101,6 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-buttonHandler();
+  buttonHandler();
 
 });
