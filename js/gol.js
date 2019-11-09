@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
   // sets up canvas variables
   const canvas = document.querySelector('.board');
   const context = canvas.getContext('2d');
@@ -8,8 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const dot = {};
   let board = [];
   let gameOfLife;
+  // TODO: set up default row col numbers based on window dimension ratio
   const game = {
     rows: 50,
+    // columns: Math.floor((window.innerHeight / window.innerWidth) * 50),
     columns: 50,
     margin: 1,
     speed: 200, // in ms per gen
@@ -21,139 +22,92 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Sets canvas dimensions and corresponding dot and margin size; redraws canvas
   function setDimensions() {
-    const greatestDim = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
-    canvas.height = greatestDim;
-    canvas.width = greatestDim;
-    dot.width = ((canvas.width - (2 * game.margin)) / game.columns) - game.margin;
-    dot.height = ((canvas.height - (2 * game.margin)) / game.rows) - game.margin;
+    canvas.width = window.innerWidth;
+    // TODO: confirm this works properly
+    // canvas.height = window.innerHeight - (game.columns % window.innerHeight);
+    canvas.height = window.innerWidth;
+    dot.width = (canvas.width - 2 * game.margin) / game.columns - game.margin;
+    dot.height = (canvas.height - 2 * game.margin) / game.rows - game.margin;
     // Adapted from http://cobwwweb.com/mutlicolored-dotted-grid-canvas
     // Uses the limiting dimension to set the diameter
     if (dot.width > dot.height) {
       dot.diameter = dot.height;
-      dot.xMargin = (canvas.width - ((2 * game.margin) + (game.columns * dot.diameter))) / game.columns;
+      dot.xMargin = (canvas.width - (2 * game.margin + game.columns * dot.diameter))
+        / game.columns;
       dot.yMargin = game.margin;
     } else {
       dot.diameter = dot.width;
       dot.xMargin = game.margin;
-      dot.yMargin = (canvas.height - ((2 * game.margin) + (game.rows * dot.diameter))) / game.rows;
+      dot.yMargin = (canvas.height - (2 * game.margin + game.rows * dot.diameter))
+        / game.rows;
     }
-    // triggers redraw, and advances generation as a side effect
-    lifeGen();
   }
 
-// // implementation of offscreen canvas is still shaky on many browsers...
-// // but might speed up performance
-// board.offscreenCanvas = document.createElement("canvas");
-// board.offscreenCanvas.width = canvas.height;
-// board.offscreenCanvas.height = canvas.width;
-// board.offscreenContext = board.offscreenCanvas.getContext("2d");
-// // grabs the offscreen image
-// let image = board.offscreenContext.getImageData(0, 0, canvas.height, canvas.width);
-// // copy onto the visible canvas
-// context.putImageData(image, 0, 0);
-
+  // // implementation of offscreen canvas is still shaky on many browsers...
+  // // but might speed up performance
+  // board.offscreenCanvas = document.createElement("canvas");
+  // board.offscreenCanvas.width = canvas.height;
+  // board.offscreenCanvas.height = canvas.width;
+  // board.offscreenContext = board.offscreenCanvas.getContext("2d");
+  // // grabs the offscreen image
+  // let image = board.offscreenContext.getImageData(0, 0, canvas.height, canvas.width);
+  // // copy onto the visible canvas
+  // context.putImageData(image, 0, 0);
 
   // initializes a new board, and randomly seeds it with new 'life' i.e. 1's
-  function initBoard () {
+  function initBoard() {
     game.generations = 0;
     board = [];
-   for (var r=0; r < game.rows; r++) {
-        board.push([]);
-   };
+    for (let r = 0; r < game.rows; r += 1) {
+      board.push([]);
+    }
 
-   for (var row = 0; row < game.rows; row++) {
-    for (var column = 0; column < game.columns; column++) {
-      var randNum = Math.floor(Math.random()*game.density);
-      board[row].push(randNum);
+    for (let row = 0; row < game.rows; row += 1) {
+      for (let column = 0; column < game.columns; column += 1) {
+        const randNum = Math.floor(Math.random() * game.density);
+        board[row].push(randNum);
+      }
     }
   }
-}
 
   // creates and returns an array full of 0's
   function zeroBoard() {
     board = [];
-  for (var r=0; r < game.rows; r++) {
-        board.push([]);
-   }
-   for (var row = 0; row < game.rows; row++) {
-    for (var column = 0; column < game.columns; column++) {
-      board[row].push(0);
+    for (let r = 0; r < game.rows; r += 1) {
+      board.push([]);
+    }
+    for (let row = 0; row < game.rows; row += 1) {
+      for (let column = 0; column < game.columns; column += 1) {
+        board[row].push(0);
       }
     }
   }
 
   // sums up and returns all the neighbors values in the array
-  // checks to see if the neighbor position is out of bounds
   function neighborSum(x, y) {
     let sum = 0;
-    xBound = game.columns - 1;
-    yBound = game.rows - 1;
-    let b = board;
-
-    if ((x === 0) && (y === 0)){
-      sum =  b[x+1][y+1]+ b[x+1][y] + b[x][y+1];
-    } else if ((x === xBound) && (y === yBound)){
-      sum = b[x-1][y]+ b[x-1][y-1] + b[x][y-1];
-    } else if ((x === 0) && (y === yBound)){
-      sum = b[x][y-1]+ b[x+1][y-1] + b[x+1][y];
-    } else if ((x === xBound) && (y === 0)){
-      sum = b[x-1][y]+ b[x-1][y+1] + b[x][y+1];
-    } else if (x === xBound){
-      sum = b[x][y+1] + b[x][y-1] + b[x-1][y+1] + b[x-1][y-1] + b[x-1][y];
-    } else if (y === yBound){
-      sum = b[x+1][y] + b[x-1][y] + b[x+1][y-1] + b[x][y-1] + b[x-1][y-1];
-    } else if (x === 0){
-      sum = b[x][y+1] + b[x][y-1] + b[x+1][y+1] + b[x+1][y] + b[x+1][y-1];
-    } else if (y === 0){
-      sum = b[x+1][y] + b[x-1][y] + b[x+1][y+1] + b[x][y+1] + b[x-1][y+1];
-    } else {
-      sum = b[x+1][y] + b[x-1][y] + b[x][y+1] + b[x][y-1] + b[x+1][y+1] + b[x-1][y-1]+ b[x+1][y-1]+ b[x-1][y+1];
-
+    for (let i = -1; i <= 1; i += 1) {
+      for (let j = -1; j <= 1; j += 1) {
+        // if neighbor position is out of bounds, return 0
+        const neighborVal = (board[y + i] && board[y + i][x + j]);
+        sum += neighborVal || 0;
+      }
     }
-    return sum;
+    // return the value of all neighbors minus the value of the cell itself
+    return sum - board[y][x];
   }
 
-  function lifeGen() {
-    clearDots();
-    game.generations += 1;
-    document.querySelector('.gen').innerHTML = `Generation:<br>${game.generations}`;
-    context.fillStyle = game.cellColor;
-    let x = 0,
-        y = -1,
-        arrLen = board[0].length;
-    // using the format array = array.map(rows=>rows.map(cell=>cell));
-    board = board.map( function (items) {
-    y++;
-    return items.map( function (cellVal) {
-     // resets the board length counter to prevent overflow
-      if (x === arrLen) {
-        x = 0;
-      };
-      const neighbors = neighborSum (y, x);
-      var state = null;
-       // Basic rules of Conway's Game of Life:
-       // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
-       if ((cellVal === 1) && ((neighbors <= 3 ) && (neighbors >= 2))) {
-         state = 1;
-         drawDot(x, y, dot.diameter);
-      // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
-      } else if ((cellVal === 0) && (neighbors === 3)) {
-        state = 1;
-        drawDot(x, y, dot.diameter);
-      } else {
-        state = 0;
-      }
-      x += 1;
-      return state;
-      });
-    });
+  // overlays the board with a blank rectangle
+  function clearDots() {
+    context.fillStyle = 'rgba(250, 250, 250, 0.7)';
+    context.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   // draws each 'dot' - currently in the shape of a rectangle.
   function drawDot(x, y, diameter, color) {
     // calculates the dot positioning based on the px margin, px diameter and board position
-    const xPos = (x * (dot.diameter + dot.xMargin)) + game.margin + (dot.xMargin / 2);
-    const yPos = (y * (dot.diameter + dot.yMargin)) + game.margin + (dot.yMargin / 2);
+    const xPos = x * (dot.diameter + dot.xMargin) + game.margin + dot.xMargin / 2;
+    const yPos = y * (dot.diameter + dot.yMargin) + game.margin + dot.yMargin / 2;
     if (xPos < canvas.width && yPos < canvas.height) {
       context.fillRect(xPos, yPos, diameter, diameter);
     }
@@ -162,34 +116,41 @@ document.addEventListener('DOMContentLoaded', () => {
     // context.arc(x, y, diameter / 2, 0, 2 * Math.PI, false);
     // context.fill();
   }
-  // overlays the board with a blank rectangle
-  function clearDots() {
-    context.fillStyle = 'rgba(250, 250, 250, 0.7)';
-    context.fillRect( 0, 0, canvas.width, canvas.height);
+
+  function lifeGen() {
+    clearDots();
+    game.generations += 1;
+    document.querySelector(
+      '.gen',
+    ).innerHTML = `Generation:<br>${game.generations}`;
+    context.fillStyle = game.cellColor;
+    board = board.map((rows, y) => rows.map((cellVal, x) => {
+      const neighbors = neighborSum(x, y);
+      let state = 0;
+      // Basic rules of Conway's Game of Life:
+      // If the cell is alive, then it stays alive only if it has  2 or 3 live neighbors.
+      // If the cell is dead, then it becomes alive only if it has 3 live neighbors.
+      const wasAlive = Boolean(cellVal);
+      const isAlive = (wasAlive && neighbors === 2) || neighbors === 3;
+      if (isAlive) {
+        state = 1;
+        drawDot(x, y, dot.diameter);
+      }
+      return state;
+    }));
   }
-
-  // button handlers
-  document.querySelector('.pause').addEventListener('click', pauseHandler);
-  document.querySelector('.step').addEventListener('click', stepHandler);
-  document.querySelector('.reset').addEventListener('click', resetHandler);
-  document.querySelector('.clear').addEventListener('click', clearHandler);
-
-  // event listeners for edit functionality
-  document.addEventListener('mousedown', toggleCell);
-  document.addEventListener('mouseup', () => document.removeEventListener('mousemove', dragCell));
 
   // pauses / unpauses the animation on click
   function pauseHandler(e) {
-    let button = document.querySelector('.pause');
+    const pauseBtn = document.querySelector('.pause');
     e.stopPropagation();
     if (gameOfLife) {
       clearInterval(gameOfLife);
       gameOfLife = null;
-      button.style.backgroundImage = 'url("assets/play.svg")';
-    }
-    else {
+      pauseBtn.style.backgroundImage = 'url("assets/play.svg")';
+    } else {
       gameOfLife = setInterval(lifeGen, game.speed);
-      button.style.backgroundImage = 'url("assets/pause.svg")';
+      pauseBtn.style.backgroundImage = 'url("assets/pause.svg")';
     }
   }
 
@@ -198,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (gameOfLife) {
       clearInterval(gameOfLife);
       gameOfLife = null;
-      document.querySelector('.pause').style.backgroundImage = 'url("assets/play.svg")'
+      document.querySelector('.pause').style.backgroundImage = 'url("assets/play.svg")';
     }
     lifeGen();
   }
@@ -206,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // resets the board to default state
   function resetHandler() {
     clearInterval(gameOfLife);
-    clearDots()
+    clearDots();
     initBoard();
     if (gameOfLife) gameOfLife = setInterval(lifeGen, game.speed);
     else lifeGen();
@@ -225,16 +186,19 @@ document.addEventListener('DOMContentLoaded', () => {
       this.x = Math.floor(xPos / (dot.diameter + dot.xMargin));
       this.y = Math.floor(yPos / (dot.diameter + dot.yMargin));
     }
+
     // getter and setter for the cell state, 0 or 1
     get state() {
       return board[this.y][this.x];
     }
+
     set state(val) {
       board[this.y][this.x] = val;
     }
+
     // flips the cell bit to the designated state and draws to canvas
     draw(bit) {
-      if (this.state != bit) {
+      if (this.state !== bit) {
         this.state = bit;
         context.fillStyle = bit ? game.cellColor : game.background;
         drawDot(this.x, this.y, dot.diameter);
@@ -242,29 +206,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // toggles cell state on click and drag
+  function dragCell(e) {
+    e.stopPropagation();
+    if (
+      e.clientX > 0
+      && e.clientX < canvas.width
+      && (e.clientY > 0 && e.clientY < canvas.height)
+    ) {
+      const dragPos = new Cell(e.clientX, e.clientY);
+      dragPos.draw(e.shiftKey ? 0 : 1);
+    }
+  }
+
   // toggles the cell state on click; shift removes cells
   function toggleCell(e) {
     e.stopPropagation();
     const mousePos = new Cell(e.clientX, e.clientY);
-    e.shiftKey ? mousePos.draw(0) : mousePos.draw(1);
+    mousePos.draw(e.shiftKey ? 0 : 1);
     document.addEventListener('mousemove', dragCell);
   }
 
-  // toggles cell state on click and drag
-  function dragCell(e){
-    e.stopPropagation();
-    if ((0 < e.clientX && e.clientX < canvas.width) && (0 < e.clientY && e.clientY < canvas.height)) {
-      const dragPos = new Cell(e.clientX, e.clientY);
-      e.shiftKey ? dragPos.draw(0) : dragPos.draw(1);
-    }
-  }
+  // button handlers
+  document.querySelector('.pause').addEventListener('click', pauseHandler);
+  document.querySelector('.step').addEventListener('click', stepHandler);
+  document.querySelector('.reset').addEventListener('click', resetHandler);
+  document.querySelector('.clear').addEventListener('click', clearHandler);
+
+  // event listeners for edit functionality
+  document.addEventListener('mousedown', toggleCell);
+  document.addEventListener('mouseup', () => document.removeEventListener('mousemove', dragCell));
+
 
   // sets initial board dimensions
   // sets the initial board state and speed
   initBoard();
   setDimensions();
+  lifeGen();
   gameOfLife = setInterval(lifeGen, game.speed);
   // event listener on window resize; resets dimensions and triggers redraw
   window.addEventListener('resize', setDimensions);
-
 });
