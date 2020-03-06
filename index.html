@@ -1,211 +1,197 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Nick Taft</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link type="text/css" rel="stylesheet" href="css/styles.css"/>
-    <link type="text/css" rel="stylesheet" href="css/gol.css"/>
 
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <script type="text/javascript" src="js/gol.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Nick Taft</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link type="text/css" rel="stylesheet" href="css/styles.css" />
+  <link type="text/css" rel="stylesheet" href="css/gol.css" />
+
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <script type="text/javascript" src="js/gol.js"></script>
+</head>
+
+<body>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <canvas class="board" position="absolute" top="0" left="0" width="200px" height="200px">
-    </canvas>
-    <div class="control-box">
-      <div class="settings btn">
+  <canvas class="board" position="absolute" top="0" left="0" width="200px" height="200px">
+  </canvas>
+  <div class="control-box">
+    <div class="settings btn">
+    </div>
+    <div class="pause btn">
+    </div>
+    <div class="step btn">
+    </div>
+    <div class="reset btn">
+    </div>
+    <div class="clear btn">
+    </div>
+    <div class="gen-box">
+      <span class="gen">
+      </span>
+    </div>
+    <div class="info">
+      <div>Interactive Game of Life -- by Nick Taft, on <a href="http://www.github.com/ntaft/gol-bg"> GitHub</a>.
       </div>
-      <div class="pause btn">
-      </div>
-      <div class="step btn">
-      </div>
-      <div class="reset btn">
-      </div>
-      <div class="clear btn">
-      </div>
-      <div class="gen-box">
-        <span class="gen">
-        </span>
-      </div>
-      <div class="info">
-        <div>Interactive Game of Life -- by Nick Taft, on <a href="http://www.github.com/ntaft/gol-bg"> GitHub</a>.
-        </div>
-        <div>
-          Click and drag to create cells; shift-click to remove.
-        </div>
+      <div>
+        Click and drag to create cells; shift-click to remove.
       </div>
     </div>
-    <section>
-        <header class="radial-overlay">
-          <h1>Nick Taft</h1>
-          <h2>Web Developer<span> | </span>Researcher<span> | </span>Science Geek</h2>
-          <nav>
-            <a href="#first-section">About Me</a><span> | </span>
-            <a href="#second-section">Projects</a><span> | </span>
-            <a href="#third-section">Contact</a>
-          </nav>
-          <div class="ext-links">
-
-            <a href="https://www.linkedin.com/in/nicktaft">
-              <img src="/assets/linkedin.svg" alt="LinkedIn">
-            </a>
-            <a href="https://github.com/ntaft">
-              <img src="/assets/github-original.svg" alt="GitHub">
-            </a>
-            <a href="https://www.facebook.com/nick.taft.75">
-              <img src="/assets/facebook.svg" alt="Facebook">
-            </a>
-          </div>
-          </header>
+  </div>
+  <main>
+    <section id="intro">
+      <header class="radial-overlay">
+        <h1>Nick Taft</h1>
+        <h2>Web Developer<span> | </span>Science Geek</h2>
+        <!-- <nav>
+        <a href="#first-section">About Me</a><span> | </span>
+        <a href="#second-section">Projects</a><span> | </span>
+        <a href="#third-section">Contact</a>
+      </nav> -->
+        <nav class="ext-links">
+          <a href="https://www.linkedin.com/in/nicktaft">
+            <img src="/assets/linkedin.svg" alt="LinkedIn">
+          </a>
+          <a href="https://github.com/ntaft">
+            <img src="/assets/github-original.svg" alt="GitHub">
+          </a>
+          <a href="https://www.facebook.com/nick.taft.75">
+            <img src="/assets/facebook.svg" alt="Facebook">
+          </a>
+        </nav>
+      </header>
 
     </section>
 
-    <section id="first-section">
-      <div class="about-box">
+    <section class="dark-bg" id="about">
+      <div class="about-text">
         <h2>ABOUT ME</h2>
-          <div class="about-text">
-            <p>
-              I code to solve problems. From building innovative responsive websites to tinkering in the garage, I enjoy coming up with creative solutions to complex problems. I'm analytical and detail-oriented, and I thrive on creating work that is meaningful and inspiring.
-            </p>
+        <p>
+          I code to solve problems. From building innovative responsive websites to tinkering in the garage, I enjoy
+          coming up with creative solutions to complex problems. I'm analytical and detail-oriented, and I thrive on
+          creating work that is meaningful and inspiring.
+        </p>
+      </div>
+      <div class="skill-bar">
+        <img src="/devicons/html5-plain-wordmark.svg" alt="HTML5">
+        <img src="/devicons/css3-plain-wordmark.svg" alt="CSS3">
+        <img src="/devicons/javascript-plain.svg" alt="Javascript">
+        <img src="/devicons/nodejs-plain-wordmark.svg" alt="Node.js">
+        <img src="/devicons/react-original-wordmark.svg" alt="React">
+        <img src="/devicons/webpack-plain-wordmark.svg" alt="Webpack">
+        <img src="/devicons/docker-plain-wordmark.svg" alt="Docker">
+        <img src="/devicons/mongodb-plain-wordmark.svg" alt="MongoDB">
+        <img src="/devicons/postgresql-plain-wordmark.svg" alt="postgreSQL">
+        <img src="/devicons/jquery-plain-wordmark.svg" alt="jQuery">
+      </div>
+    </section>
+
+    <section id="experience" class="light-bg">
+      <div class="portfolio-container">
+        <h2 class="mt4">WEB DEVELOPMENT</h2>
+        <div class="portfolio-block">
+
+          <div class="text-box">
+              <div class="content">
+                <h3>Bed Bath &amp; Beyond</h3>
+                <h4>
+                  Lead Developer, Personalization Lab
+                </h4>
+              </div>
+              <div class="content">
+                <ul>
+                  <li>Lead developer of a new agile cross-functional team to rapidly test multiple concepts and analyze results in 2-week project sprints.</li>
+                  <li class="mob-hide">Executed data-driven decisions using a customer data platform, creating highly targeted and personalized site experiences.</li>
+                  <li class="mob-hide">Collaborated with designers, project managers, data analysts, and copywriters from ideation through execution.</li>
+                  <li class="mob-hide">Developed multiple site-wide React components that expanded the Beyond+ loyalty program to well over 1 million subscribers.</li>
+                  <li class="mob-hide">Led presentations and fostered integration of tech trends such as React hooks, accessibility, site performance, and code optimization.</li>
+                </ul>
+              </div>
+          </div>
+
+          <div class="text-box">
+              <div class="content">
+                <h3>Bed Bath &amp; Beyond</h3>
+                <h4>
+                  UX Front End Developer
+                </h4>
+              </div>
+              <div class="content">
+                <ul>
+                  <li class="mob-hide">Replatformed site from antiquated server-side rendered content and jQuery to a cutting-edge Node/Express/React stack.</li>
+                  <li class="mob-hide">Translated over 1,000 legacy pages into new React structure, built custom node-based scraper & parser to automate conversion.</li>
+                  <li>Built composable components with API-consuming Redux Sagas and modular CSS with robust unit testing to create a pixel-perfect UX.</li>
+                  <li class="mob-hide">Utilized A/B testing techniques to rapidly build, deploy, and learn.</li>
+                  <li class="mob-hide">Maintained webpack configs, packages, and Storybook modules.</li>
+                </ul>
+              </div>
+          </div>
+
+        </div>
+        <h2>OTHER PROJECTS</h2>
+        <div class="portfolio-block">
+
+          <div id="box1" class="ratio-box">
+            <a href="https://github.com/ntaft/Tappity" class="content overlay on-hover">
+              <h3>Tappity</h3>
+              <p>
+                Blending wearable tech with web design, tap your fingers to record and dub musical tracks.
+              </p>
+              <ul class="mob-hide">
+                <li>CSS, HTML, Javascript, React</li>
+                <li>Node, Express, AJAX, PSQL</li>
+                <li>Web Audio API, bcrypt, JWT</li>
+                <li>Arduino, Rasberry Pi</li>
+              </ul>
+            </a>
+            <img class="overlay" src="https://i.imgur.com/HbhZ2n1.jpg" alt="Image of glove hardware">
+          </div>
+
+          <div id="box2" class="ratio-box">
+            <a href="vilnatroupe-globe-d3/index.html" class="content overlay on-hover">
+              <h3>Mapping the Vilna Troupe</h3>
+              <p>
+                D3.js visualization of the historic global tours of a diasporic theatre company. 
+                <span class="mob-hide">
+                  for a fourthcoming book in Michigan Press.
+                </span>
+              </p>
+              <ul class="mob-hide">
+                <li>CSS, HTML</li>
+                <li>Javascript, AJAX, D3.js</li>
+              </ul>
+            </a>
+            <img class="overlay" src="../assets/vt-globe.png" alt="Image of globe mapped with vilna troupe routes">
+          </div>
           </div>
         </div>
-        <div class="skill-bar">
-            <img src="/devicons/html5-plain-wordmark.svg" alt="HTML">
-            <img src="/devicons/css3-plain-wordmark.svg" alt="CSS">
-            <img src="/devicons/javascript-plain.svg" alt="Javascript">
-            <img src="/devicons/jquery-plain-wordmark.svg" alt="jQuery">
-            <img src="/devicons/nodejs-plain-wordmark.svg" alt="Node.js">
-            <img src="/devicons/react-original-wordmark.svg" alt="React">
-            <img src="/devicons/ruby-plain-wordmark.svg" alt="Ruby">
-            <img src="/devicons/rails-plain-wordmark.svg" alt="Ruby on Rails">
-            <img src="/devicons/mongodb-plain-wordmark.svg" alt="MongoDB">
-            <img src="/devicons/postgresql-plain-wordmark.svg" alt="postgreSQL">
-          </div>
-    </section>
-
-    <section id="second-section">
-    <div class="portfolio-container">
-      <h2>PROJECTS</h2>
-      <div class="portfolio-block">
-
-      <div id="box1" class="square bg">
-        <a href="https://github.com/ntaft/Tappity" class="content">
-          <div id="hidden1" class="textbox">
-            <h2>Tappity</h2>
-            <p>
-              Blending wearable tech with web design, tap your fingers to record and dub musical tracks.
-            </p>
-            <ul>
-              <li>CSS, HTML, Javascript, React</li>
-              <li>Node, Express, AJAX, PSQL</li>
-              <li>Web Audio API, bcrypt, JWT</li>
-              <li>Arduino, Rasberry Pi</li>
-            </ul>
-          </div>
-        </a>
-      </div>
-
-      <div id="box2" class="square bg">
-        <a href="vilnatroupe-globe-d3/index.html" class="content">
-          <div id="hidden2" class="textbox">
-            <h2>Mapping the Vilna Troupe</h2>
-            <h3>Currently in development</h3>
-            <p>
-              D3.js visualization of the historic global tours of a diasporic theatre company, for a fourthcoming book in Michigan Press.
-            </p>
-            <ul>
-              <li>CSS, HTML</li>
-              <li>Javascript, AJAX, D3.js</li>
-            </ul>
-          </div>
-        </a>
-      </div>
-
-      <div id="box3" class="square bg">
-        <a href="http://www.nj11thforchange.org"  class="content">
-          <div id="hidden3" class="textbox">
-            <h2>NJ 11th For Change</h2>
-            <p>
-             Represents the rapidly growing non-partisan organization in NJ's 11th district.
-            </p>
-          </div>
-        </a>
-      </div>
-
-      <div id="box4" class="square bg">
-        <a href="#" class="content">
-          <!-- <h2>Game of Life Game</h2> -->
-          <div id="hidden4" class="textbox">
-            <h2>GoGoL</h2>
-            <p>
-              Gamification of Conway's Game of Life; zap cells and avoid being devoured
-            </p>
-            <ul>
-              <li>CSS, HTML</li>
-              <li>Javascript, jQuery</li>
-            </ul>
-          </div>
-        </a>
-      </div>
-
-      </div>
-
-      <div class="portfolio-block">
-
-        <div id="box5" class="square bg">
-        <a href="https://here.com/en" class="content">
-          <div id="hidden5" class="textbox">
-            <h2>HERE/Nokia</h2>
-            <h3>Mapping Researcher</h3>
-            Conducted geographical research for HERE/Nokia mapping software, expanding map data to improve the user experience.
-          </div>
-        </a>
-      </div>
-
-      <div id="box6" class="square bg">
-         <a href="http://www.amazedesign.com/#/perot-museum-of-nature-and-science/" class="content">
-          <div id="hidden6" class="textbox">
-            <h2>Amaze Design</h2>
-            <h3>Content Developer</h3>
-              Led the design of 12,000 square feet of exhibit halls and digital interactives for the critically-acclaimed Perot Museum of Nature and Science
-          </div>
-        </a>
-      </div>
-      </div>
 
     </section>
+  </main>
+      <footer class="light-bg">
+        Nick Taft 2017
+      </footer>
 
-  <section id="third-section">
+  <!-- <section id="third-section">
     <div class="contact-container">
-      <h2 class="feather">Contact me</h2>
-      <div class="form-box">
-        <form id="send-message" action="" method="POST">
-          <input type="text" name="name" value="" placeholder="Name"><br>
-          <input type="email" name="_replyto" value="" placeholder="Email"><br>
-          <textarea name="message" rows="10" value="" placeholder="Message" ></textarea><br>
-          <button id="send-button" type="submit" value="Send">
-            Submit
-          </button>
-        </form>
-      </div>
+      <h3 class="feather">Contact me</h2>
+        <div class="form-box">
+          <form id="send-message" action="" method="POST">
+            <input type="text" name="name" value="" placeholder="Name"><br>
+            <input type="email" name="_replyto" value="" placeholder="Email"><br>
+            <textarea name="message" rows="10" value="" placeholder="Message"></textarea><br>
+            <button id="send-button" type="submit" value="Send">
+              Submit
+            </button>
+          </form>
+        </div>
     </div>
-  </section>
+  </section> -->
 
-  <footer>
-    c Nick Taft 2017
-  </footer>
-<!--     <CORSConfiguration>
-      <CORSRule>
-          <AllowedOrigin>*</AllowedOrigin>
-          <AllowedMethod>GET</AllowedMethod>
-          <MaxAgeSeconds>3000</MaxAgeSeconds>
-          <AllowedHeader>Authorization</AllowedHeader>
-      </CORSRule>
-    </CORSConfiguration> -->
 
 
   <script type="text/javascript" src="js/main.js"></script>
-  </body>
+</body>
+
 </html>
