@@ -146,6 +146,8 @@ a {
   width: 10%;
 }
 
+/*  For responsive image backgrounds */
+
 .ratio-box {
   height: 0;
   position: relative;
@@ -274,8 +276,6 @@ li {
   text-align: left;
 }
 
-/*  For responsive image backgrounds */
-
 .portfolio-container {
   width: 100%;
   display: flex;
@@ -296,5 +296,4 @@ li {
 footer {
   text-align: center;
   padding: 1em 0;
-  color: #
 }
